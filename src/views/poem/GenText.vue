@@ -1,0 +1,77 @@
+<template>
+  <v-container fluid fill-height id="wrapper">
+    <v-layout column>
+      <v-flex xs6>
+        <v-container fluid fill-height pa-0>
+          <v-layout column justify-end>
+            <v-flex xs2>
+              <v-img src="~@/assets/poem/bg-text-input.png">
+                <v-container fluid fill-height pa-0>
+                  <v-layout row wrap justify-center align-center>
+                    <v-flex xs5>
+                      <v-text-field
+                        label="请输入关键词"
+                        v-model="textInput"
+                      ></v-text-field>
+                    </v-flex>
+                  </v-layout>
+                </v-container>
+              </v-img>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+      <v-flex xs4>
+        <v-container fluid fill-height>
+          <v-layout row wrap justify-center align-center>
+            <v-flex xs4 sm2 pl-4 pr-1>
+              <router-link to="/">
+                <v-img src="~@/assets/poem/button-back.png"></v-img>
+              </router-link>
+            </v-flex>
+            <v-flex xs4 sm2 pa-0>
+              <a @click="onTextGoClick()">
+                <v-img src="~@/assets/poem/button-text-go.png"></v-img>
+              </a>
+            </v-flex>
+            <v-flex xs4 sm2 pl-1 pr-4>
+              <router-link to="/poem/photo">
+                <v-img src="~@/assets/poem/button-switch-to-photo.png"></v-img>
+              </router-link>
+            </v-flex>
+          </v-layout>
+        </v-container>
+      </v-flex>
+    </v-layout>
+  </v-container>
+</template>
+
+<script lang="js">
+import {
+  POEM_SET_GEN_METHOD, POEM_SET_TEXT_INPUT
+} from '@/mutation-types'
+
+export default {
+  name: 'GenText',
+  data () {
+    return {
+      textInput: ''
+    }
+  },
+  methods: {
+    onTextGoClick () {
+      this.$store.commit(POEM_SET_GEN_METHOD, 'text')
+      this.$store.commit(POEM_SET_TEXT_INPUT, this.textInput)
+      this.$router.push('/poem/settings')
+    }
+  }
+}
+</script>
+
+<style scoped lang="stylus">
+  #wrapper
+    background-image: url("~@/assets/poem/bg-text.png")
+    background-repeat: no-repeat
+    background-size: 100% 100%
+    padding: 1em 3em
+</style>

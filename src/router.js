@@ -14,6 +14,41 @@ export default new Router({
       component: Home
     },
     {
+      path: '/duilian/text',
+      name: 'duilian-text',
+      component: () => import('./views/duilian/GenText.vue')
+    },
+    {
+      path: '/duilian/photo',
+      name: 'duilian-photo',
+      component: () => import('./views/duilian/GenPhoto.vue')
+    },
+    {
+      path: '/duilian/result',
+      name: 'duilian-result',
+      component: () => import('./views/duilian/GenResult.vue')
+    },
+    {
+      path: '/poem/text',
+      name: 'poem-text',
+      component: () => import('./views/poem/GenText.vue')
+    },
+    {
+      path: '/poem/photo',
+      name: 'poem-photo',
+      component: () => import('./views/poem/GenPhoto.vue')
+    },
+    {
+      path: '/poem/settings',
+      name: 'poem-settings',
+      component: () => import('./views/poem/GenSettings.vue')
+    },
+    {
+      path: '/poem/result',
+      name: 'poem-result',
+      component: () => import('./views/poem/GenResult.vue')
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

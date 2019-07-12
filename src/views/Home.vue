@@ -1,18 +1,51 @@
 <template>
-  <div class="home">
-    <img alt="Vue logo" src="../assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <v-container
+    fluid
+    fill-height
+    id="wrapper">
+    <v-layout
+      row wrap
+      justify-center
+      align-center
+    >
+      <v-flex xs4 sm2 pa-1 sink>
+        <router-link to="/duilian/text">
+          <v-img src="~@/assets/home/button-duilian.png"></v-img>
+        </router-link>
+      </v-flex>
+      <v-flex xs4 sm2 pa-1>
+        <router-link to="/poem/text">
+        <v-img src="~@/assets/home/button-poem.png"></v-img>
+      </router-link>
+      </v-flex>
+      <v-flex xs4 sm2 pa-1 float>
+        <router-link to="/about">
+          <v-img src="~@/assets/home/button-guwen.png"></v-img>
+        </router-link>
+      </v-flex>
+    </v-layout>
+  </v-container>
 </template>
 
 <script>
-// @ is an alias to /src
-import HelloWorld from '@/components/HelloWorld.vue'
 
 export default {
-  name: 'home',
-  components: {
-    HelloWorld
+  data () {
+    return {}
   }
 }
 </script>
+
+<style lang="stylus" scoped>
+  #wrapper
+    background-image: url("~@/assets/home/bg.png")
+    background-repeat: no-repeat
+    background-size: 100% 100%
+    padding: 1em 3em
+
+  .sink
+    transform: translateY(6em)
+
+  .float
+    transform: translateY(-6em)
+</style>
