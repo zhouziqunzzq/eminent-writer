@@ -19,7 +19,7 @@
       </router-link>
       </v-flex>
       <v-flex xs4 sm2 pa-1 float>
-        <router-link to="/about">
+        <router-link to="/guwen/text">
           <v-img src="~@/assets/home/button-guwen.png"></v-img>
         </router-link>
       </v-flex>

@@ -8,7 +8,10 @@ import {
   POEM_SET_TEXT_INPUT,
   POEM_SET_PHOTO_FILE,
   POEM_SET_IS_CANGTOU,
-  POEM_SET_NUM_WORDS
+  POEM_SET_NUM_WORDS,
+  GUWEN_SET_GEN_METHOD,
+  GUWEN_SET_TEXT_INPUT,
+  GUWEN_SET_PHOTO_FILE
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -26,9 +29,15 @@ export default new Vuex.Store({
       genMethod: 'text',
       isCangtou: false,
       numberOfWords: 5
+    },
+    guwen: {
+      textInput: '',
+      photoFile: null,
+      genMethod: 'text'
     }
   },
   mutations: {
+    // duilian
     [DUILIAN_SET_GEN_METHOD] (state, method) {
       state.duilian.genMethod = method
     },
@@ -38,6 +47,7 @@ export default new Vuex.Store({
     [DUILIAN_SET_PHOTO_FILE] (state, file) {
       state.duilian.photoFile = file
     },
+    // poem
     [POEM_SET_GEN_METHOD] (state, method) {
       state.poem.genMethod = method
     },
@@ -52,6 +62,16 @@ export default new Vuex.Store({
     },
     [POEM_SET_NUM_WORDS] (state, n) {
       state.poem.numberOfWords = n
+    },
+    // guwen
+    [GUWEN_SET_GEN_METHOD] (state, method) {
+      state.guwen.genMethod = method
+    },
+    [GUWEN_SET_TEXT_INPUT] (state, input) {
+      state.guwen.textInput = input
+    },
+    [GUWEN_SET_PHOTO_FILE] (state, file) {
+      state.guwen.photoFile = file
     }
   },
   actions: {

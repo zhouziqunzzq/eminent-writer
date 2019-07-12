@@ -8,11 +8,13 @@ export default new Router({
   mode: 'history',
   base: process.env.BASE_URL,
   routes: [
+    // home
     {
       path: '/',
       name: 'home',
       component: Home
     },
+    // duilian
     {
       path: '/duilian/text',
       name: 'duilian-text',
@@ -28,6 +30,7 @@ export default new Router({
       name: 'duilian-result',
       component: () => import('./views/duilian/GenResult.vue')
     },
+    // poem
     {
       path: '/poem/text',
       name: 'poem-text',
@@ -48,13 +51,21 @@ export default new Router({
       name: 'poem-result',
       component: () => import('./views/poem/GenResult.vue')
     },
+    // guwen
     {
-      path: '/about',
-      name: 'about',
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import(/* webpackChunkName: "about" */ './views/About.vue')
+      path: '/guwen/text',
+      name: 'guwen-text',
+      component: () => import('./views/guwen/GenText.vue')
+    },
+    {
+      path: '/guwen/photo',
+      name: 'guwen-photo',
+      component: () => import('./views/guwen/GenPhoto.vue')
+    },
+    {
+      path: '/guwen/result',
+      name: 'guwen-result',
+      component: () => import('./views/guwen/GenResult.vue')
     }
   ]
 })
