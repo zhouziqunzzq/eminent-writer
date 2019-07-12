@@ -32,7 +32,7 @@
           <v-layout row wrap justify-center align-center>
             <v-flex xs4 sm2 pl-4 pr-1>
               <router-link to="/">
-                <v-img src="~@/assets/poem/button-back.png"></v-img>
+                <v-img src="~@/assets/common/button-back.png"></v-img>
               </router-link>
             </v-flex>
             <v-flex xs4 sm2 pa-0>
@@ -42,12 +42,12 @@
                      @change="onFileChange"
               >
               <a @click="$refs.photo_file.click()">
-                <v-img src="~@/assets/poem/button-photo-go.png"></v-img>
+                <v-img src="~@/assets/common/button-photo-go.png"></v-img>
               </a>
             </v-flex>
             <v-flex xs4 sm2 pl-1 pr-4>
               <router-link to="/poem/text">
-                <v-img src="~@/assets/poem/button-switch-to-text.png"></v-img>
+                <v-img src="~@/assets/common/button-switch-to-text.png"></v-img>
               </router-link>
             </v-flex>
           </v-layout>

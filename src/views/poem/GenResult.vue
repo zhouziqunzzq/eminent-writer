@@ -28,7 +28,7 @@
           <v-layout row justify-center>
             <v-flex xs4>
               <router-link to="/">
-                <v-img src="~@/assets/poem/button-back-to-home.png"></v-img>
+                <v-img src="~@/assets/common/button-back-to-home.png"></v-img>
               </router-link>
             </v-flex>
           </v-layout>

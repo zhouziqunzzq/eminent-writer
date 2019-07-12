@@ -62,7 +62,7 @@
           <v-layout row wrap justify-center align-center>
             <v-flex xs4 sm2 pl-4 pr-1>
               <a @click="$router.go(-1)">
-                <v-img src="~@/assets/poem/button-back.png"></v-img>
+                <v-img src="~@/assets/common/button-back.png"></v-img>
               </a>
             </v-flex>
             <v-flex xs4 sm2 pa-0>

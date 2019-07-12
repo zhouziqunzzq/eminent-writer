@@ -26,17 +26,17 @@
           <v-layout row wrap justify-center align-center>
             <v-flex xs4 sm2 pl-4 pr-1>
               <router-link to="/">
-                <v-img src="~@/assets/duilian/button-back.png"></v-img>
+                <v-img src="~@/assets/common/button-back.png"></v-img>
               </router-link>
             </v-flex>
             <v-flex xs4 sm2 pa-0>
               <a @click="onTextGoClick()">
-                <v-img src="~@/assets/duilian/button-text-go.png"></v-img>
+                <v-img src="~@/assets/common/button-text-go.png"></v-img>
               </a>
             </v-flex>
             <v-flex xs4 sm2 pl-1 pr-4>
               <router-link to="/duilian/photo">
-                <v-img src="~@/assets/duilian/button-switch-to-photo.png"></v-img>
+                <v-img src="~@/assets/common/button-switch-to-photo.png"></v-img>
               </router-link>
             </v-flex>
           </v-layout>

@@ -29,7 +29,7 @@
           <v-layout row wrap justify-center align-center>
             <v-flex xs4 sm2 pl-4 pr-1>
               <router-link to="/">
-                <v-img src="~@/assets/guwen/button-back.png"></v-img>
+                <v-img src="~@/assets/common/button-back.png"></v-img>
               </router-link>
             </v-flex>
             <v-flex xs4 sm2 pa-0>
