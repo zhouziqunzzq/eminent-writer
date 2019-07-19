@@ -4,6 +4,12 @@
       <router-view></router-view>
     </v-content>
 
+    <audio
+      autoplay="autoplay" loop="loop" preload="auto"
+      src="/audio/bgm.mp3"
+    >
+    </audio>
+
     <v-snackbar
       v-model="snackbar.show"
       :color="snackbar.color"
