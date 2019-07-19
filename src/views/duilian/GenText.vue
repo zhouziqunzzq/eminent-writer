@@ -11,8 +11,7 @@
                     <v-flex xs5 style="margin-top: 15%">
                       <label for="text-input"></label>
                       <input type="text" id="text-input"
-                             placeholder="关键词或上联"
-                             style="width: 100%"
+                             placeholder="请输入关键词"
                              v-model="textInput"
                       />
                     </v-flex>
@@ -49,6 +48,8 @@
 </template>
 
 <script lang="js">
+import { mapState, mapActions } from 'vuex'
+import { isChinese } from '@/helpers'
 import {
   DUILIAN_SET_GEN_METHOD, DUILIAN_SET_TEXT_INPUT
 } from '@/mutation-types'
@@ -60,12 +61,32 @@ export default {
       textInput: ''
     }
   },
+  computed: {
+    ...mapState({
+      textInputHistory: state => state.duilian.textInput
+    })
+  },
   methods: {
+    ...mapActions([
+      'showInfo',
+      'showError'
+    ]),
     onTextGoClick () {
+      if (!(this.textInput.length >= 2 && this.textInput.length <= 4)) {
+        this.showError('关键词只能包含 2 到 4 个中文字符')
+        return
+      }
+      if (!isChinese(this.textInput)) {
+        this.showError('关键词只能包含中文')
+        return
+      }
       this.$store.commit(DUILIAN_SET_GEN_METHOD, 'text')
       this.$store.commit(DUILIAN_SET_TEXT_INPUT, this.textInput)
       this.$router.push('/duilian/result')
     }
+  },
+  mounted () {
+    this.textInput = this.textInputHistory
   }
 }
 </script>

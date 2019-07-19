@@ -12,7 +12,6 @@
                       <label for="text-input"></label>
                       <input type="text" id="text-input"
                              placeholder="请输入关键词"
-                             style="width: 100%"
                              v-model="textInput"
                       />
                     </v-flex>

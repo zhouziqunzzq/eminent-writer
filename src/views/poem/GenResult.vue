@@ -79,11 +79,11 @@ export default {
     ])
   },
   async mounted () {
-    console.log(this.genMethod)
-    console.log(this.textInput)
-    console.log(this.photoFile)
-    console.log(this.isCangtou)
-    console.log(this.numberOfWords)
+    // console.log(this.genMethod)
+    // console.log(this.textInput)
+    // console.log(this.photoFile)
+    // console.log(this.isCangtou)
+    // console.log(this.numberOfWords)
     if (this.genMethod === 'text') {
       const apiURL = this.isCangtou ? poemAcrosticURL : poemKeyURL
       try {

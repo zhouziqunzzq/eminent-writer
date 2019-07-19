@@ -1,6 +1,13 @@
 <template>
   <v-container fluid fill-height id="wrapper">
-    <v-layout column justify-center>
+<!--    loader-->
+    <v-layout row justify-center align-center v-if="!isReady">
+      <v-flex xs3>
+        <v-img src="~@/assets/loading.gif"></v-img>
+      </v-flex>
+    </v-layout>
+<!--    result-->
+    <v-layout column justify-center v-else>
       <v-flex xs9>
         <v-container fluid fill-height pa-0>
           <v-layout column justify-end>
@@ -12,15 +19,21 @@
             <v-flex xs8 pa-4>
               <v-img src="~@/assets/guwen/bg-text-input.png">
                 <v-container fluid fill-height class="guwen-wrapper">
-                  <v-layout column justify-center>
-                    <v-flex xs12>
-                      <v-textarea
-                        :value="transResult"
-                        :no-resize="true"
-                        :rows="13"
-                        :readonly="true"
-                      >
-                      </v-textarea>
+                  <v-layout row wrap justify-center align-center>
+                    <v-flex xs8>
+<!--                      <v-textarea-->
+<!--                        :value="transResult"-->
+<!--                        :no-resize="true"-->
+<!--                        :rows="13"-->
+<!--                        :readonly="true"-->
+<!--                      ></v-textarea>-->
+                      <label for="trans-result"></label>
+                      <textarea
+                        id="trans-result"
+                        v-model="transResult"
+                        rows="14"
+                        readonly
+                      ></textarea>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -45,21 +58,18 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { postForm, postJson } from '@/helpers'
+import { guwenTextURL, guwenPictureURL } from '@/config'
 
 export default {
   name: 'GenResult',
   data () {
     return {
-      transResult: '这里是汉代的豫章郡城，如今是洪州的都督府，天上的方位属于翼、轸两星宿的分野，' +
-        '地上的位置连结着衡山和庐山。以三江为衣襟，以五湖为衣带，控制着楚地，连接着闽越。' +
-        '这里物产的华美，有如天降之宝，其光彩上冲牛斗之宿。这里的土地有灵秀之气，陈蕃专为徐孺设下几榻。' +
-        '洪州境内的建筑如云雾排列，有才能的人士如流星一般奔驰驱走。池据于中原与南夷的交界之处，' +
-        '宾客与主人包括了东南地区最优秀的人物。都督阎公，享有崇高的名望，远道来到洪州坐镇，宇文州牧，' +
-        '是美德的楷模，赴任途中在此暂留。每逢十日一旬的假期，来了很多的良友，迎接远客，高贵的朋友坐满了席位。' +
-        '文词宗主孟学士所作文章就像像腾起的蛟龙、飞舞的彩凤；王将军的兵器库中，' +
-        '藏有像紫电、青霜这样锋利的宝剑。由于父亲在交趾做县令，我在探亲途中经过这个著名的地方。' +
-        '我年幼无知，竟有幸亲身参加了这次盛大的宴会。'
+      transResult: '庆历四年春，滕子京谪守巴陵郡。' +
+        '越明年，政通人和，百废具兴。' +
+        '乃重修岳阳楼，增其旧制，刻唐贤今人诗赋于其上。属予作文以记之。',
+      isReady: false
     }
   },
   computed: {
@@ -69,15 +79,56 @@ export default {
       photoFile: state => state.guwen.photoFile
     })
   },
-  mounted () {
-    console.log(this.genMethod)
-    console.log(this.textInput)
-    console.log(this.photoFile)
+  methods: {
+    ...mapActions([
+      'showInfo',
+      'showError'
+    ])
+  },
+  async mounted () {
+    // console.log(this.genMethod)
+    // console.log(this.textInput)
+    // console.log(this.photoFile)
+    if (this.genMethod === 'text') {
+      try {
+        const response = await postJson(guwenTextURL, {
+          input: this.textInput,
+          type: 1
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.transResult = response.parsedBody.data
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    } else if (this.genMethod === 'photo') {
+      try {
+        const response = await postForm(guwenPictureURL, {
+          'photo': this.photoFile,
+          'type': String(1)
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.transResult = response.parsedBody.data
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    }
   }
 }
 </script>
 
 <style scoped lang="stylus">
+  @import '~@/styles/textarea-center'
+
   #wrapper
     background-image: url("~@/assets/guwen/bg-result.png")
     background-repeat: no-repeat
@@ -85,7 +136,7 @@ export default {
     padding: 15% 3em 1em 3em
 
   .guwen-wrapper
-    padding: 11% 17% 13% 15%
+    padding: 10% 3% 13.5% 0
 
   .guwen-container
     overflow: scroll

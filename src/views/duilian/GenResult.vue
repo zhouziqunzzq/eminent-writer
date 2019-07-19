@@ -1,6 +1,13 @@
 <template>
   <v-container fluid fill-height id="wrapper">
-    <v-layout column justify-center>
+<!--    loader-->
+    <v-layout row justify-center align-center v-if="!isReady">
+      <v-flex xs3>
+        <v-img src="~@/assets/loading.gif"></v-img>
+      </v-flex>
+    </v-layout>
+<!--    result-->
+    <v-layout column justify-center v-else>
       <v-flex xs3>
         <v-container fluid fill-height pt-0 pb-1 pl-4 pr-4>
           <v-layout row justify-center align-end>
@@ -64,7 +71,9 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { postForm, postJson } from '@/helpers'
+import { duilianKeyURL, duilianPictureURL } from '@/config'
 
 export default {
   name: 'GenResult',
@@ -72,7 +81,8 @@ export default {
     return {
       hengpi: '小牛雅颂',
       shanglian: '旧岁又添几个喜',
-      xialian: '新年更上一层楼'
+      xialian: '新年更上一层楼',
+      isReady: false
     }
   },
   computed: {
@@ -82,10 +92,51 @@ export default {
       photoFile: state => state.duilian.photoFile
     })
   },
-  mounted () {
-    console.log(this.genMethod)
-    console.log(this.textInput)
-    console.log(this.photoFile)
+  methods: {
+    ...mapActions([
+      'showInfo',
+      'showError'
+    ])
+  },
+  async mounted () {
+    // console.log(this.genMethod)
+    // console.log(this.textInput)
+    // console.log(this.photoFile)
+    if (this.genMethod === 'text') {
+      try {
+        const response = await postJson(duilianKeyURL, {
+          input: this.textInput
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.shanglian = response.parsedBody.data.shanglian
+          this.xialian = response.parsedBody.data.xialian
+          this.hengpi = '小牛雅颂'
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    } else if (this.genMethod === 'photo') {
+      try {
+        const response = await postForm(duilianPictureURL, {
+          'photo': this.photoFile
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.shanglian = response.parsedBody.data.shanglian
+          this.xialian = response.parsedBody.data.xialian
+          this.hengpi = '小牛雅颂'
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    }
   }
 }
 </script>

@@ -95,6 +95,7 @@ export default {
   },
   computed: {
     ...mapState({
+      genMethod: state => state.poem.genMethod,
       textInput: state => state.poem.textInput,
       isCangtou: state => state.poem.isCangtou,
       numberOfWordsHistory: state => state.poem.numberOfWords
@@ -112,7 +113,7 @@ export default {
       this.$store.commit(POEM_SET_IS_CANGTOU, false)
     },
     onGoClick () {
-      if (!this.isCangtou) {
+      if (this.genMethod === 'text' && !this.isCangtou) {
         if (this.textInput.length < 2) {
           this.showError('关键词生成绝句时，关键词至少包含两个字，请返回修改')
           return
