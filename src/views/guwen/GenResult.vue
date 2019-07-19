@@ -10,15 +10,14 @@
               >- 以下是生成的译文 -</h5>
             </v-flex>
             <v-flex xs8 pa-4>
-              <v-img src="~@/assets/guwen/bg-guwen-area.png">
+              <v-img src="~@/assets/guwen/bg-text-input.png">
                 <v-container fluid fill-height class="guwen-wrapper">
                   <v-layout column justify-center>
                     <v-flex xs12>
-<!--                      <p class="guwen-container">{{transResult}}</p>-->
                       <v-textarea
                         :value="transResult"
                         :no-resize="true"
-                        :rows="12"
+                        :rows="13"
                         :readonly="true"
                       >
                       </v-textarea>
@@ -86,7 +85,7 @@ export default {
     padding: 15% 3em 1em 3em
 
   .guwen-wrapper
-    padding: 15% 9% 16% 10%
+    padding: 11% 17% 13% 15%
 
   .guwen-container
     overflow: scroll

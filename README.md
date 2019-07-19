@@ -1,6 +1,9 @@
 # eminent-writer
 
 ## Project setup
+Rename src/config.example.js to src/config.js
+first and edit this file accordingly.
+Then run
 ```
 yarn install
 ```

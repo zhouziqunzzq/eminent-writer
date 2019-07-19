@@ -10,7 +10,7 @@
                   <v-layout row wrap justify-center align-center>
                     <v-flex xs8 style="padding-right: 2.7%">
                       <v-textarea
-                        label="待翻译的古文"
+                        label="待翻译的原文"
                         v-model="textInput"
                         :no-resize="true"
                         :clearable="true"

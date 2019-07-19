@@ -1,6 +1,13 @@
 <template>
   <v-container fluid fill-height id="wrapper">
-    <v-layout column justify-center>
+<!--    loader-->
+    <v-layout row justify-center align-center v-if="!isReady">
+      <v-flex xs3>
+        <v-img src="~@/assets/loading.gif"></v-img>
+      </v-flex>
+    </v-layout>
+<!--    result-->
+    <v-layout column justify-center v-else>
       <v-flex xs8>
         <v-container fluid fill-height pa-0>
           <v-layout column justify-end>
@@ -39,7 +46,9 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { postForm, postJson } from '@/helpers'
+import { poemKeyURL, poemAcrosticURL, poemPictureURL } from '@/config'
 
 export default {
   name: 'GenResult',
@@ -50,7 +59,8 @@ export default {
         '万径人踪灭',
         '孤舟蓑笠翁',
         '独钓寒江雪'
-      ]
+      ],
+      isReady: false
     }
   },
   computed: {
@@ -62,12 +72,52 @@ export default {
       numberOfWords: state => state.poem.numberOfWords
     })
   },
-  mounted () {
+  methods: {
+    ...mapActions([
+      'showInfo',
+      'showError'
+    ])
+  },
+  async mounted () {
     console.log(this.genMethod)
     console.log(this.textInput)
     console.log(this.photoFile)
     console.log(this.isCangtou)
     console.log(this.numberOfWords)
+    if (this.genMethod === 'text') {
+      const apiURL = this.isCangtou ? poemAcrosticURL : poemKeyURL
+      try {
+        const response = await postJson(apiURL, {
+          input: this.textInput,
+          type: Number(this.numberOfWords)
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.myPoem = response.parsedBody.data
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    } else if (this.genMethod === 'photo') {
+      try {
+        const response = await postForm(poemPictureURL, {
+          'photo': this.photoFile,
+          'type': String(this.numberOfWords)
+        })
+        if (response.parsedBody.result) {
+          this.showInfo(response.parsedBody.msg)
+          this.myPoem = response.parsedBody.data
+          this.isReady = true
+        } else {
+          this.showError(response.parsedBody.msg)
+        }
+      } catch (e) {
+        this.showError(e)
+      }
+    }
   }
 }
 </script>

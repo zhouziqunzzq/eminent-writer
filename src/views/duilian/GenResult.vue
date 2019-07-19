@@ -6,7 +6,7 @@
           <v-layout row justify-center align-end>
             <v-img src="~@/assets/duilian/bg-duilian-row.png">
               <v-container fluid fill-height pa-4>
-                <v-layout row justify-center align-center>
+                <v-layout row justify-center align-center reverse>
                   <h5 v-for="(c, i) in hengpi"
                       class="ma-1 headline font-weight-bold" :key="i">
                     {{c}}
@@ -70,7 +70,7 @@ export default {
   name: 'GenResult',
   data () {
     return {
-      hengpi: '辞旧迎新',
+      hengpi: '小牛雅颂',
       shanglian: '旧岁又添几个喜',
       xialian: '新年更上一层楼'
     }

@@ -8,11 +8,13 @@
               <v-img src="~@/assets/duilian/bg-text-input.png">
                 <v-container fluid fill-height pa-0>
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs6 style="margin-top: 15%">
-                      <v-text-field
-                        label="关键词或上联"
-                        v-model="textInput"
-                      ></v-text-field>
+                    <v-flex xs5 style="margin-top: 15%">
+                      <label for="text-input"></label>
+                      <input type="text" id="text-input"
+                             placeholder="关键词或上联"
+                             style="width: 100%"
+                             v-model="textInput"
+                      />
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -69,6 +71,8 @@ export default {
 </script>
 
 <style scoped lang="stylus">
+  @import '~@/styles/input-text-center'
+
   #wrapper
     background-image: url("~@/assets/duilian/bg-text.png")
     background-repeat: no-repeat

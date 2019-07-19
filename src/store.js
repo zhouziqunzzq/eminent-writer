@@ -11,7 +11,11 @@ import {
   POEM_SET_NUM_WORDS,
   GUWEN_SET_GEN_METHOD,
   GUWEN_SET_TEXT_INPUT,
-  GUWEN_SET_PHOTO_FILE
+  GUWEN_SET_PHOTO_FILE,
+  SHOW_SNACKBAR,
+  HIDE_SNACKBAR,
+  SET_SNACKBAR_MSG,
+  SET_SNACKBAR_COLOR
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -34,6 +38,11 @@ export default new Vuex.Store({
       textInput: '',
       photoFile: null,
       genMethod: 'text'
+    },
+    snackbar: {
+      show: false,
+      msg: '',
+      color: 'blue'
     }
   },
   mutations: {
@@ -72,9 +81,31 @@ export default new Vuex.Store({
     },
     [GUWEN_SET_PHOTO_FILE] (state, file) {
       state.guwen.photoFile = file
+    },
+    // snackbar
+    [SHOW_SNACKBAR] (state) {
+      state.snackbar.show = true
+    },
+    [HIDE_SNACKBAR] (state) {
+      state.snackbar.show = false
+    },
+    [SET_SNACKBAR_MSG] (state, msg) {
+      state.snackbar.msg = msg
+    },
+    [SET_SNACKBAR_COLOR] (state, color) {
+      state.snackbar.color = color
     }
   },
   actions: {
-
+    showInfo (context, msg) {
+      context.commit(SET_SNACKBAR_MSG, msg)
+      context.commit(SET_SNACKBAR_COLOR, 'blue')
+      context.commit(SHOW_SNACKBAR)
+    },
+    showError (context, msg) {
+      context.commit(SET_SNACKBAR_MSG, msg)
+      context.commit(SET_SNACKBAR_COLOR, 'red')
+      context.commit(SHOW_SNACKBAR)
+    }
   }
 })

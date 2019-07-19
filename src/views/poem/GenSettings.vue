@@ -80,7 +80,7 @@
 </template>
 
 <script lang="js">
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import {
   POEM_SET_IS_CANGTOU,
   POEM_SET_NUM_WORDS
@@ -95,10 +95,16 @@ export default {
   },
   computed: {
     ...mapState({
-      isCangtou: state => state.poem.isCangtou
+      textInput: state => state.poem.textInput,
+      isCangtou: state => state.poem.isCangtou,
+      numberOfWordsHistory: state => state.poem.numberOfWords
     })
   },
   methods: {
+    ...mapActions([
+      'showInfo',
+      'showError'
+    ]),
     onYesClick () {
       this.$store.commit(POEM_SET_IS_CANGTOU, true)
     },
@@ -106,9 +112,24 @@ export default {
       this.$store.commit(POEM_SET_IS_CANGTOU, false)
     },
     onGoClick () {
+      if (!this.isCangtou) {
+        if (this.textInput.length < 2) {
+          this.showError('关键词生成绝句时，关键词至少包含两个字，请返回修改')
+          return
+        }
+      }
+      if (this.numberOfWords !== '5' && this.numberOfWords !== '7' &&
+          this.numberOfWords !== 5 && this.numberOfWords !== 7) {
+        console.log(this.numberOfWords)
+        this.showError('诗歌字数只能为 5 或 7')
+        return
+      }
       this.$store.commit(POEM_SET_NUM_WORDS, this.numberOfWords)
       this.$router.push('/poem/result')
     }
+  },
+  mounted () {
+    this.numberOfWords = this.numberOfWordsHistory
   }
 }
 </script>
