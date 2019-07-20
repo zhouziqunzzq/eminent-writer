@@ -1,6 +1,14 @@
 <template>
   <v-app>
-    <v-content>
+    <pre-load-image
+      :img-url-arr="imgURLs"
+      :order="false"
+      tip-str="小牛雅颂加载中..."
+      v-if="isLoading"
+      @imgAllLoaded="isLoading = false"
+    ></pre-load-image>
+
+    <v-content v-else>
       <router-view></router-view>
     </v-content>
 
@@ -30,24 +38,32 @@
 <script lang="js">
 import { mapState } from 'vuex'
 import { HIDE_SNACKBAR } from '@/mutation-types'
+import { imgURLs } from '@/assets-description'
+import preLoadImage from 'vue-preload-image'
 
 export default {
   name: 'App',
-  components: {},
+  components: {
+    preLoadImage
+  },
   data () {
     return {
-      //
-    }
-  },
-  methods: {
-    hideSnackbar () {
-      this.$store.commit(HIDE_SNACKBAR)
+      imgURLs: imgURLs,
+      isLoading: true
     }
   },
   computed: {
     ...mapState([
       'snackbar'
     ])
+  },
+  methods: {
+    hideSnackbar () {
+      this.$store.commit(HIDE_SNACKBAR)
+    }
+  },
+  mounted () {
+    console.log(imgURLs)
   }
 }
 </script>
