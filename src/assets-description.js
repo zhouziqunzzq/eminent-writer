@@ -1,9 +1,11 @@
 export const imgURLs = [
   // app
   require('@/assets/logo.jpeg'),
+  require('@/assets/music.png'),
   // common
   require('@/assets/common/button-back.png'),
   require('@/assets/common/button-back-to-home.png'),
+  require('@/assets/common/button-common.png'),
   require('@/assets/common/button-photo-go.png'),
   require('@/assets/common/button-switch-to-photo.png'),
   require('@/assets/common/button-switch-to-text.png'),
@@ -26,7 +28,7 @@ export const imgURLs = [
   require('@/assets/guwen/button-switch-to-photo.png'),
   require('@/assets/guwen/button-text-go.png'),
   // home
-  require('@/assets/home/bg.png'),
+  require('@/assets/home/bg.jpg'),
   require('@/assets/home/button-duilian.png'),
   require('@/assets/home/button-guwen.png'),
   require('@/assets/home/button-poem.png'),

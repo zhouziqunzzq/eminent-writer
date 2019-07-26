@@ -1,9 +1,11 @@
 import Vue from 'vue'
 import './plugins/vuetify'
+import './plugins/custom-buttons'
 import App from './App.vue'
 import router from './router'
 import store from './store'
 import './registerServiceWorker'
+import './styles/my-fonts.styl'
 
 Vue.config.productionTip = false
 

@@ -5,23 +5,32 @@
     id="wrapper">
     <v-layout
       row wrap
-      justify-center
-      align-center
+      justify-end
+      align-end
     >
-      <v-flex xs4 sm2 pa-1 sink>
-        <router-link to="/duilian/text">
-          <v-img src="~@/assets/home/button-duilian.png"></v-img>
-        </router-link>
-      </v-flex>
-      <v-flex xs4 sm2 pa-1>
-        <router-link to="/poem/text">
-        <v-img src="~@/assets/home/button-poem.png"></v-img>
-      </router-link>
-      </v-flex>
-      <v-flex xs4 sm2 pa-1 float>
-        <router-link to="/guwen/text">
-          <v-img src="~@/assets/home/button-guwen.png"></v-img>
-        </router-link>
+      <v-flex xs4>
+        <v-container fluid fill-height pa-0>
+          <v-layout column justify-center>
+            <v-flex xs4 sm2 pa-2>
+              <ink-button
+                tag="对联"
+                @click="$router.push('/duilian/text')"
+              ></ink-button>
+            </v-flex>
+            <v-flex xs4 sm2 pa-2>
+              <ink-button
+                tag="古诗"
+                @click="$router.push('/poem/text')"
+              ></ink-button>
+            </v-flex>
+            <v-flex xs4 sm2 pa-2>
+              <ink-button
+                tag="古文"
+                @click="$router.push('/guwen/text')"
+              ></ink-button>
+            </v-flex>
+          </v-layout>
+        </v-container>
       </v-flex>
     </v-layout>
   </v-container>
@@ -29,8 +38,10 @@
 
 <script>
 import { mapActions } from 'vuex'
+import InkButton from '../components/InkButton'
 
 export default {
+  components: { InkButton },
   data () {
     return {}
   },
@@ -45,10 +56,10 @@ export default {
 
 <style lang="stylus" scoped>
   #wrapper
-    background-image: url("~@/assets/home/bg.png")
+    background-image: url("~@/assets/home/bg.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
-    padding: 1em 3em
+    padding: 1rem
 
   .sink
     transform: translateY(6em)
