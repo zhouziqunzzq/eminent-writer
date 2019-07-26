@@ -7,36 +7,75 @@
       </v-flex>
     </v-layout>
 <!--    result-->
-    <v-layout column justify-center v-else>
+    <v-layout column v-else>
       <v-flex xs8>
-        <v-container fluid fill-height pa-0>
+        <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-end>
-            <v-flex xs8>
-              <v-img src="~@/assets/poem/bg-poem-area.png">
+            <v-flex :class="{ 'xs7': numberOfWords === 5, 'xs9': numberOfWords === 7 }">
                 <v-container fluid fill-height class="poem-wrapper">
-                  <v-layout column justify-center>
+                  <v-layout row justify-center align-center reverse>
                     <v-flex
                       xs1
                       v-for="(v, i) in myPoem"
                       :key="i"
-                      mb-1
+                      ml-3 mr-3
                     >
-                      <h5 class="headline text-xs-center">{{v}}</h5>
+                      <v-container fluid fill-height pa-0>
+                        <v-layout column justify-center>
+                          <v-flex
+                            xs1
+                            v-for="(c, ii) in v"
+                            :key="ii"
+                          >
+                            <h5 class="headline text-xs-center kaiti">{{c}}</h5>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
                     </v-flex>
                   </v-layout>
                 </v-container>
-              </v-img>
             </v-flex>
           </v-layout>
         </v-container>
       </v-flex>
       <v-flex xs4>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-center>
+          <v-layout row align-end
+            :class="{'justify-space-between': genMethod === 'text',
+                     'justify-end': genMethod === 'photo'}"
+          >
+            <template v-if="genMethod === 'text'">
+              <v-flex xs2 align-self-end v-if="textInput.length <= 3">
+                <small-stamp :text="textInput"></small-stamp>
+              </v-flex>
+              <v-flex xs3 align-self-end v-else>
+                <big-stamp :text="textInput"></big-stamp>
+              </v-flex>
+            </template>
             <v-flex xs4>
-              <router-link to="/">
-                <v-img src="~@/assets/common/button-back-to-home.png"></v-img>
-              </router-link>
+              <v-container fluid fill-height pa-0>
+                <v-layout column justify-center>
+                  <v-flex xs4 pa-2>
+                    <ink-button
+                      tag="重新生成"
+                      font-size="16px"
+                      @click="$router.go(-1)"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 pa-2>
+                    <ink-button
+                      tag="分享"
+                      @click="showInfo('暂未实现，敬请期待...')"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 pa-2>
+                    <ink-button
+                      tag="返回"
+                      @click="$router.push('/')"
+                    ></ink-button>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
@@ -49,9 +88,15 @@
 import { mapState, mapActions } from 'vuex'
 import { postForm, postJson } from '@/helpers'
 import { poemKeyURL, poemAcrosticURL, poemPictureURL } from '@/config'
+import smallStamp from '@/components/SmallStamp.vue'
+import bigStamp from '@/components/BigStamp.vue'
 
 export default {
   name: 'GenResult',
+  components: {
+    smallStamp,
+    bigStamp
+  },
   data () {
     return {
       myPoem: [
@@ -124,11 +169,15 @@ export default {
 
 <style scoped lang="stylus">
   #wrapper
-    background-image: url("~@/assets/poem/bg-result.png")
+    background-image: url("~@/assets/home/bg.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
-    padding: 15% 3em 1em 3em
+    padding: 1rem
 
   .poem-wrapper
-    padding: 8% 6% 0 18%
+    padding: 0
+    background-color: rgba(255, 255, 255, 0.6)
+
+  .kaiti
+    font-family: 'STKaiti' !important
 </style>

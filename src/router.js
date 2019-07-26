@@ -32,19 +32,9 @@ export default new Router({
     },
     // poem
     {
-      path: '/poem/text',
-      name: 'poem-text',
-      component: () => import('./views/poem/GenText.vue')
-    },
-    {
-      path: '/poem/photo',
-      name: 'poem-photo',
-      component: () => import('./views/poem/GenPhoto.vue')
-    },
-    {
-      path: '/poem/settings',
-      name: 'poem-settings',
-      component: () => import('./views/poem/GenSettings.vue')
+      path: '/poem/home',
+      name: 'poem-home',
+      component: () => import('./views/poem/GenHome.vue')
     },
     {
       path: '/poem/result',

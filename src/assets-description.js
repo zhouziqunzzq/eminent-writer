@@ -5,11 +5,13 @@ export const imgURLs = [
   // common
   require('@/assets/common/button-back.png'),
   require('@/assets/common/button-back-to-home.png'),
-  require('@/assets/common/button-common.png'),
+  require('@/assets/common/button-ink.png'),
   require('@/assets/common/button-photo-go.png'),
   require('@/assets/common/button-switch-to-photo.png'),
   require('@/assets/common/button-switch-to-text.png'),
   require('@/assets/common/button-text-go.png'),
+  require('@/assets/common/stamp-big.png'),
+  require('@/assets/common/stamp-small.png'),
   // duilian
   require('@/assets/duilian/bg-duilian-column.png'),
   require('@/assets/duilian/bg-duilian-row.png'),
@@ -29,21 +31,6 @@ export const imgURLs = [
   require('@/assets/guwen/button-text-go.png'),
   // home
   require('@/assets/home/bg.jpg'),
-  require('@/assets/home/button-duilian.png'),
-  require('@/assets/home/button-guwen.png'),
-  require('@/assets/home/button-poem.png'),
   // poem
-  require('@/assets/poem/bg-number-of-words-area.png'),
-  require('@/assets/poem/bg-photo.png'),
-  require('@/assets/poem/bg-photo-area.png'),
-  require('@/assets/poem/bg-poem-area.png'),
-  require('@/assets/poem/bg-result.png'),
-  require('@/assets/poem/bg-settings.png'),
-  require('@/assets/poem/bg-text.png'),
-  require('@/assets/poem/bg-text-input.png'),
-  require('@/assets/poem/button-go.png'),
-  require('@/assets/poem/button-no.png'),
-  require('@/assets/poem/button-no-chosen.png'),
-  require('@/assets/poem/button-yes.png'),
-  require('@/assets/poem/button-yes-chosen.png')
+  require('@/assets/poem/bg.jpg')
 ]

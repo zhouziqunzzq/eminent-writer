@@ -1,6 +1,6 @@
 <template>
   <a @click="$emit('click')">
-    <v-img src="~@/assets/common/button-common.png" :contain="true">
+    <v-img src="~@/assets/common/button-ink.png" :contain="true">
       <v-container fluid fill-height pa-0>
         <v-layout row justify-center align-center>
           <v-flex xs12>

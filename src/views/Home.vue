@@ -1,33 +1,33 @@
 <template>
-  <v-container
-    fluid
-    fill-height
-    id="wrapper">
-    <v-layout
-      row wrap
-      justify-end
-      align-end
-    >
+  <v-container fluid fill-height id="wrapper">
+    <v-layout column>
+      <v-flex xs8></v-flex>
       <v-flex xs4>
         <v-container fluid fill-height pa-0>
-          <v-layout column justify-center>
-            <v-flex xs4 sm2 pa-2>
-              <ink-button
-                tag="对联"
-                @click="$router.push('/duilian/text')"
-              ></ink-button>
-            </v-flex>
-            <v-flex xs4 sm2 pa-2>
-              <ink-button
-                tag="古诗"
-                @click="$router.push('/poem/text')"
-              ></ink-button>
-            </v-flex>
-            <v-flex xs4 sm2 pa-2>
-              <ink-button
-                tag="古文"
-                @click="$router.push('/guwen/text')"
-              ></ink-button>
+          <v-layout row justify-end align-end>
+            <v-flex xs4>
+              <v-container fluid fill-height pa-0>
+                <v-layout column justify-center>
+                  <v-flex xs4 sm2 pa-2>
+                    <ink-button
+                      tag="对联"
+                      @click="$router.push('/duilian/text')"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 sm2 pa-2>
+                    <ink-button
+                      tag="古诗"
+                      @click="$router.push('/poem/home')"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 sm2 pa-2>
+                    <ink-button
+                      tag="古文"
+                      @click="$router.push('/guwen/text')"
+                    ></ink-button>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
