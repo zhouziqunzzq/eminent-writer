@@ -23,7 +23,7 @@
                   <v-flex xs4 sm2 pa-2>
                     <ink-button
                       tag="古文"
-                      @click="$router.push('/guwen/text')"
+                      @click="$router.push('/guwen/home')"
                     ></ink-button>
                   </v-flex>
                 </v-layout>

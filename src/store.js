@@ -13,6 +13,7 @@ import {
   GUWEN_SET_GEN_METHOD,
   GUWEN_SET_TEXT_INPUT,
   GUWEN_SET_PHOTO_FILE,
+  GUWEN_SET_DIRECTION,
   SHOW_SNACKBAR,
   HIDE_SNACKBAR,
   SET_SNACKBAR_MSG,
@@ -39,7 +40,8 @@ export default new Vuex.Store({
     guwen: {
       textInput: '',
       photoFile: null,
-      genMethod: 'text'
+      genMethod: 'text',
+      direction: 1 // 1:classic -> modern; 2: modern -> classic
     },
     snackbar: {
       show: false,
@@ -86,6 +88,9 @@ export default new Vuex.Store({
     },
     [GUWEN_SET_PHOTO_FILE] (state, file) {
       state.guwen.photoFile = file
+    },
+    [GUWEN_SET_DIRECTION] (state, direction) {
+      state.guwen.direction = direction
     },
     // snackbar
     [SHOW_SNACKBAR] (state) {

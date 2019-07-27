@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height id="wrapper">
-    <!--    loader-->
+<!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
       <v-flex xs3>
         <single-loader></single-loader>
@@ -9,30 +9,18 @@
 <!--    result-->
     <v-layout column justify-center v-else>
       <v-flex xs9>
-        <v-container fluid fill-height pa-0>
-          <v-layout column justify-end>
-            <v-flex xs1>
-              <h5 class="headline text-xs-center
-                font-weight-bold brown--text text--darken-2"
-              >- 以下是生成的译文 -</h5>
-            </v-flex>
-            <v-flex xs8 pa-4>
-              <v-img src="~@/assets/guwen/bg-text-input.png">
-                <v-container fluid fill-height class="guwen-wrapper">
+        <v-container fluid fill-height pa-0 pl-4 pr-4>
+          <v-layout column justify-start align-center>
+            <v-flex xs8 style="width: 95%">
+              <v-img src="~@/assets/guwen/bg-text-input.png" :contain="true">
+                <v-container fluid fill-height class="textarea-wrapper">
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs8>
-<!--                      <v-textarea-->
-<!--                        :value="transResult"-->
-<!--                        :no-resize="true"-->
-<!--                        :rows="13"-->
-<!--                        :readonly="true"-->
-<!--                      ></v-textarea>-->
+                    <v-flex xs9>
                       <label for="trans-result"></label>
                       <textarea
                         id="trans-result"
                         v-model="transResult"
-                        rows="14"
-                        readonly
+                        rows="15"
                       ></textarea>
                     </v-flex>
                   </v-layout>
@@ -44,11 +32,36 @@
       </v-flex>
       <v-flex xs3>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-center>
-            <v-flex xs4>
-              <router-link to="/">
-                <v-img src="~@/assets/common/button-back-to-home.png"></v-img>
-              </router-link>
+          <v-layout row justify-space-between align-end>
+            <v-flex xs2>
+              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+            </v-flex>
+            <v-flex xs4 fill-height>
+              <v-container fluid fill-height pa-0>
+                <v-layout column justify-end align-end>
+                  <v-flex xs2 pa-0 style="width: 75%">
+                    <ink-button
+                      tag="复制"
+                      font-size="14px"
+                      @click="doCopy()"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs2 pa-0 style="width: 75%">
+                    <ink-button
+                      tag="分享"
+                      font-size="14px"
+                      @click="showInfo('暂未实现，敬请期待...')"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs2 pa-0 style="width: 75%">
+                    <ink-button
+                      tag="返回"
+                      font-size="14px"
+                      @click="$router.push('/')"
+                    ></ink-button>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
@@ -80,24 +93,31 @@ export default {
     ...mapState({
       genMethod: state => state.guwen.genMethod,
       textInput: state => state.guwen.textInput,
-      photoFile: state => state.guwen.photoFile
+      photoFile: state => state.guwen.photoFile,
+      direction: state => state.guwen.direction
     })
   },
   methods: {
     ...mapActions([
       'showInfo',
       'showError'
-    ])
+    ]),
+    doCopy () {
+      this.$copyText(this.transResult)
+        .then(() => {
+          this.showInfo('翻译结果已复制到剪贴板')
+        }, (e) => {
+          this.showError('自动复制失败，请尝试手动复制')
+          console.log(e)
+        })
+    }
   },
   async mounted () {
-    // console.log(this.genMethod)
-    // console.log(this.textInput)
-    // console.log(this.photoFile)
     if (this.genMethod === 'text') {
       try {
         const response = await postJson(guwenTextURL, {
           input: this.textInput,
-          type: 1
+          type: this.direction
         })
         if (response.parsedBody.result) {
           this.showInfo(response.parsedBody.msg)
@@ -113,7 +133,7 @@ export default {
       try {
         const response = await postForm(guwenPictureURL, {
           'photo': this.photoFile,
-          'type': String(1)
+          'type': String(this.direction)
         })
         if (response.parsedBody.result) {
           this.showInfo(response.parsedBody.msg)
@@ -134,14 +154,12 @@ export default {
   @import '~@/styles/textarea-center'
 
   #wrapper
-    background-image: url("~@/assets/guwen/bg-result.png")
+    background-image: url("~@/assets/home/bg.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
-    padding: 15% 3em 1em 3em
+    padding: 1rem
 
-  .guwen-wrapper
-    padding: 10% 3% 13.5% 0
-
-  .guwen-container
-    overflow: scroll
+  .textarea-wrapper
+    position: relative
+    padding: 10% 0
 </style>

@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import './plugins/vuetify'
+import './plugins/vue-clipboard'
 import './plugins/custom-buttons'
 import App from './App.vue'
 import router from './router'

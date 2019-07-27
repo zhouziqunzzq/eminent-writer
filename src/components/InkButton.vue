@@ -1,6 +1,6 @@
 <template>
   <a @click="$emit('click')">
-    <v-img src="~@/assets/common/button-ink.png" :contain="true">
+    <v-img src="~@/assets/common/button-ink.png" :contain="true" :width="width">
       <v-container fluid fill-height pa-0>
         <v-layout row justify-center align-center>
           <v-flex xs12>
@@ -19,6 +19,10 @@
 export default {
   name: 'InkButton',
   props: {
+    width: {
+      type: String,
+      default: '100%'
+    },
     fontFamily: {
       type: String,
       default: 'SimSun'

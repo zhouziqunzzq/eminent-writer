@@ -38,14 +38,9 @@ export default new Router({
     },
     // guwen
     {
-      path: '/guwen/text',
-      name: 'guwen-text',
-      component: () => import('./views/guwen/GenText.vue')
-    },
-    {
-      path: '/guwen/photo',
-      name: 'guwen-photo',
-      component: () => import('./views/guwen/GenPhoto.vue')
+      path: '/guwen/home',
+      name: 'guwen-home',
+      component: () => import('./views/guwen/GenHome.vue')
     },
     {
       path: '/guwen/result',

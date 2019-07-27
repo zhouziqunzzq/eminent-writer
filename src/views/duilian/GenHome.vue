@@ -65,7 +65,10 @@
       </v-flex>
       <v-flex xs4>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-end align-end>
+          <v-layout row justify-space-between align-end>
+            <v-flex xs2>
+              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+            </v-flex>
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center>

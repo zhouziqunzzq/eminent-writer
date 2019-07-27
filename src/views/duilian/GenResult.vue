@@ -58,10 +58,7 @@
       </v-flex>
       <v-flex xs4>
         <v-container fluid fill-height pa-0>
-          <v-layout row align-end
-                    :class="{'justify-space-between': genMethod === 'text' && isKeyword,
-                     'justify-end': genMethod === 'photo' || !isKeyword}"
-          >
+          <v-layout row justify-space-between align-end>
             <template v-if="genMethod === 'text' && isKeyword">
               <v-flex xs2 align-self-end v-if="textInput.length <= 3">
                 <small-stamp :text="textInput"></small-stamp>
@@ -70,6 +67,9 @@
                 <big-stamp :text="textInput"></big-stamp>
               </v-flex>
             </template>
+            <v-flex xs2 v-else>
+              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+            </v-flex>
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center>
