@@ -4,6 +4,7 @@ import {
   DUILIAN_SET_GEN_METHOD,
   DUILIAN_SET_TEXT_INPUT,
   DUILIAN_SET_PHOTO_FILE,
+  DUILIAN_SET_IS_KEYWORD,
   POEM_SET_GEN_METHOD,
   POEM_SET_TEXT_INPUT,
   POEM_SET_PHOTO_FILE,
@@ -25,7 +26,8 @@ export default new Vuex.Store({
     duilian: {
       textInput: '',
       photoFile: null,
-      genMethod: 'text'
+      genMethod: 'text',
+      isKeyword: false
     },
     poem: {
       textInput: '',
@@ -55,6 +57,9 @@ export default new Vuex.Store({
     },
     [DUILIAN_SET_PHOTO_FILE] (state, file) {
       state.duilian.photoFile = file
+    },
+    [DUILIAN_SET_IS_KEYWORD] (state, isKeyword) {
+      state.duilian.isKeyword = isKeyword
     },
     // poem
     [POEM_SET_GEN_METHOD] (state, method) {

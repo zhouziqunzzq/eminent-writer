@@ -13,13 +13,8 @@ export const imgURLs = [
   require('@/assets/common/stamp-big.png'),
   require('@/assets/common/stamp-small.png'),
   // duilian
-  require('@/assets/duilian/bg-duilian-column.png'),
-  require('@/assets/duilian/bg-duilian-row.png'),
-  require('@/assets/duilian/bg-photo.png'),
-  require('@/assets/duilian/bg-photo-area.png'),
-  require('@/assets/duilian/bg-result.png'),
-  require('@/assets/duilian/bg-text.png'),
-  require('@/assets/duilian/bg-text-input.png'),
+  require('@/assets/duilian/bg.jpg'),
+  require('@/assets/duilian/bg-result.jpg'),
   // guwen
   require('@/assets/guwen/bg-guwen-area.png'),
   require('@/assets/guwen/bg-photo.png'),

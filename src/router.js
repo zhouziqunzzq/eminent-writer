@@ -16,14 +16,9 @@ export default new Router({
     },
     // duilian
     {
-      path: '/duilian/text',
-      name: 'duilian-text',
-      component: () => import('./views/duilian/GenText.vue')
-    },
-    {
-      path: '/duilian/photo',
-      name: 'duilian-photo',
-      component: () => import('./views/duilian/GenPhoto.vue')
+      path: '/duilian/home',
+      name: 'duilian-home',
+      component: () => import('./views/duilian/GenHome.vue')
     },
     {
       path: '/duilian/result',

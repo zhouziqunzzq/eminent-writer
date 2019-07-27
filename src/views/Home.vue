@@ -11,7 +11,7 @@
                   <v-flex xs4 sm2 pa-2>
                     <ink-button
                       tag="对联"
-                      @click="$router.push('/duilian/text')"
+                      @click="$router.push('/duilian/home')"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 sm2 pa-2>
