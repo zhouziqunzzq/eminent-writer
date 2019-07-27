@@ -25,7 +25,7 @@
         loop="loop" preload="auto"
       >
       </audio>
-      <a id="music-control" @click="toggleAudio()">
+      <a id="music-control" @click="toggleAudio()" v-show="app.showMusicControl">
         <v-img :class="{'rotate-forever': isPlaying}" src="~@/assets/music.png"></v-img>
       </a>
 
@@ -70,7 +70,8 @@ export default {
   },
   computed: {
     ...mapState([
-      'snackbar'
+      'snackbar',
+      'app'
     ])
   },
   methods: {

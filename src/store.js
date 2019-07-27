@@ -17,7 +17,8 @@ import {
   SHOW_SNACKBAR,
   HIDE_SNACKBAR,
   SET_SNACKBAR_MSG,
-  SET_SNACKBAR_COLOR
+  SET_SNACKBAR_COLOR,
+  SET_SHOW_MUSIC_CONTROL
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -47,6 +48,9 @@ export default new Vuex.Store({
       show: false,
       msg: '',
       color: 'blue'
+    },
+    app: {
+      showMusicControl: true
     }
   },
   mutations: {
@@ -104,6 +108,10 @@ export default new Vuex.Store({
     },
     [SET_SNACKBAR_COLOR] (state, color) {
       state.snackbar.color = color
+    },
+    // app
+    [SET_SHOW_MUSIC_CONTROL] (state, v) {
+      state.app.showMusicControl = v
     }
   },
   actions: {
@@ -116,6 +124,12 @@ export default new Vuex.Store({
       context.commit(SET_SNACKBAR_MSG, msg)
       context.commit(SET_SNACKBAR_COLOR, 'red')
       context.commit(SHOW_SNACKBAR)
+    },
+    showMusicControl (context) {
+      context.commit(SET_SHOW_MUSIC_CONTROL, true)
+    },
+    hideMusicControl (context) {
+      context.commit(SET_SHOW_MUSIC_CONTROL, false)
     }
   }
 })

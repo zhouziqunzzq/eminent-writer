@@ -70,7 +70,7 @@
             <v-flex xs2 v-else>
               <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
             </v-flex>
-            <v-flex xs4>
+            <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center>
                   <v-flex xs4 pa-2>
@@ -83,7 +83,7 @@
                   <v-flex xs4 pa-2>
                     <ink-button
                       tag="分享"
-                      @click="showInfo('暂未实现，敬请期待...')"
+                      @click="share()"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2>
@@ -109,6 +109,7 @@ import { duilianDuiURL, duilianKeyURL, duilianPictureURL } from '@/config'
 import singleLoader from '@/components/SingleLoader'
 import smallStamp from '@/components/SmallStamp.vue'
 import bigStamp from '@/components/BigStamp.vue'
+import html2canvas from 'html2canvas'
 
 export default {
   name: 'GenResult',
@@ -122,7 +123,8 @@ export default {
       hengpi: '小牛雅颂',
       shanglian: '旧岁又添几个喜',
       xialian: '新年更上一层楼',
-      isReady: false
+      isReady: false,
+      showButton: true
     }
   },
   computed: {
@@ -136,8 +138,29 @@ export default {
   methods: {
     ...mapActions([
       'showInfo',
-      'showError'
-    ])
+      'showError',
+      'showMusicControl',
+      'hideMusicControl'
+    ]),
+    share () {
+      this.hideMusicControl()
+      this.showButton = false
+      setTimeout(() => {
+        html2canvas(document.body, { useCORS: true })
+          .then((canvas) => {
+            this.showMusicControl()
+            this.showButton = true
+            let link = document.createElement('a')
+            link.href = canvas.toDataURL('img/png')
+            link.setAttribute('download', 'niutrans_duilian_' + new Date().getTime() + '.png')
+            link.style.display = 'none'
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+            this.showInfo('已将生成结果保存为图片，请您下载后随意分享吧～')
+          })
+      }, 10)
+    }
   },
   async mounted () {
     if (this.genMethod === 'text') {

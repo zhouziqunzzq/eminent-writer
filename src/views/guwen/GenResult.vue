@@ -15,13 +15,19 @@
               <v-img src="~@/assets/guwen/bg-text-input.png" :contain="true">
                 <v-container fluid fill-height class="textarea-wrapper">
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs9>
+                    <v-flex xs9 fill-height>
                       <label for="trans-result"></label>
                       <textarea
                         id="trans-result"
                         v-model="transResult"
                         rows="15"
+                        v-show="showButton"
                       ></textarea>
+                      <div v-show="!showButton"
+                           class="kaiti"
+                           style="font-size: 16px"
+                           v-html="convertedTransResult"
+                      ></div>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -36,7 +42,7 @@
             <v-flex xs2>
               <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
             </v-flex>
-            <v-flex xs4 fill-height>
+            <v-flex xs4 fill-height v-show="showButton">
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-end align-end>
                   <v-flex xs2 pa-0 style="width: 75%">
@@ -50,7 +56,7 @@
                     <ink-button
                       tag="分享"
                       font-size="14px"
-                      @click="showInfo('暂未实现，敬请期待...')"
+                      @click="share()"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs2 pa-0 style="width: 75%">
@@ -75,6 +81,7 @@ import { mapState, mapActions } from 'vuex'
 import { postForm, postJson } from '@/helpers'
 import { guwenTextURL, guwenPictureURL } from '@/config'
 import singleLoader from '@/components/SingleLoader'
+import html2canvas from 'html2canvas'
 
 export default {
   name: 'GenResult',
@@ -86,7 +93,8 @@ export default {
       transResult: '庆历四年春，滕子京谪守巴陵郡。' +
         '越明年，政通人和，百废具兴。' +
         '乃重修岳阳楼，增其旧制，刻唐贤今人诗赋于其上。属予作文以记之。',
-      isReady: false
+      isReady: false,
+      showButton: true
     }
   },
   computed: {
@@ -95,12 +103,17 @@ export default {
       textInput: state => state.guwen.textInput,
       photoFile: state => state.guwen.photoFile,
       direction: state => state.guwen.direction
-    })
+    }),
+    convertedTransResult () {
+      return this.transResult.replace(/(?:\r\n|\r|\n)/g, '<br />')
+    }
   },
   methods: {
     ...mapActions([
       'showInfo',
-      'showError'
+      'showError',
+      'showMusicControl',
+      'hideMusicControl'
     ]),
     doCopy () {
       this.$copyText(this.transResult)
@@ -110,6 +123,25 @@ export default {
           this.showError('自动复制失败，请尝试手动复制')
           console.log(e)
         })
+    },
+    share () {
+      this.hideMusicControl()
+      this.showButton = false
+      setTimeout(() => {
+        html2canvas(document.body, { useCORS: true })
+          .then((canvas) => {
+            this.showMusicControl()
+            this.showButton = true
+            let link = document.createElement('a')
+            link.href = canvas.toDataURL('img/png')
+            link.setAttribute('download', 'niutrans_guwen_' + new Date().getTime() + '.png')
+            link.style.display = 'none'
+            document.body.appendChild(link)
+            link.click()
+            link.remove()
+            this.showInfo('已将生成结果保存为图片，请您下载后随意分享吧～')
+          })
+      }, 100)
     }
   },
   async mounted () {
