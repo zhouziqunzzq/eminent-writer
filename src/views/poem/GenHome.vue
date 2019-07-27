@@ -20,7 +20,7 @@
               <v-container fluid fill-height pa-0>
                 <v-layout row justify-center align-center>
                   <v-flex xs12>
-                    <p class="body-1 ma-0">格式</p>
+                    <p class="body-1 ma-0 simsun">格式</p>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -37,7 +37,7 @@
                           />
                         </v-flex>
                         <v-flex xs8>
-                          <label for="check-five">五言</label>
+                          <label class="simsun" for="check-five">五言</label>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -52,7 +52,7 @@
                           />
                         </v-flex>
                         <v-flex xs8>
-                          <label for="check-seven">七言</label>
+                          <label class="simsun" for="check-seven">七言</label>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -64,7 +64,7 @@
               <v-container fluid fill-height pa-0>
                 <v-layout row justify-center align-center>
                   <v-flex xs12>
-                    <p class="body-1 ma-0">类型</p>
+                    <p class="body-1 ma-0 simsun">类型</p>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -81,7 +81,7 @@
                           />
                         </v-flex>
                         <v-flex xs8>
-                          <label for="check-jueju">绝句</label>
+                          <label class="simsun" for="check-jueju">绝句</label>
                         </v-flex>
                       </v-layout>
                     </v-container>
@@ -96,7 +96,7 @@
                           />
                         </v-flex>
                         <v-flex xs8>
-                          <label for="check-cangtou">藏头</label>
+                          <label class="simsun" for="check-cangtou">藏头</label>
                         </v-flex>
                       </v-layout>
                     </v-container>

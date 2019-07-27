@@ -5,7 +5,7 @@
         <v-layout row justify-center align-center>
           <v-flex xs12>
             <h6
-              class="text-xs-center white--text pr-3"
+              class="text-xs-center white--text pr-3 simsun"
               :style="buttonStyle"
             >{{tag}}</h6>
           </v-flex>

@@ -38,6 +38,4 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .xingkai
-    font-family: 'STXingkai' !important
 </style>

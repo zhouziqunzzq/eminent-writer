@@ -30,9 +30,6 @@ export default {
 </script>
 
 <style scoped lang="stylus">
-  .xingkai
-    font-family: 'STXingkai' !important
-
   .smaller
     font-size: 18px !important
     line-height: 18px !important

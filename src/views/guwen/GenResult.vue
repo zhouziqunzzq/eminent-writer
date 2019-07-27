@@ -1,9 +1,9 @@
 <template>
   <v-container fluid fill-height id="wrapper">
-<!--    loader-->
+    <!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
       <v-flex xs3>
-        <v-img src="~@/assets/loading.gif"></v-img>
+        <single-loader></single-loader>
       </v-flex>
     </v-layout>
 <!--    result-->
@@ -61,9 +61,13 @@
 import { mapState, mapActions } from 'vuex'
 import { postForm, postJson } from '@/helpers'
 import { guwenTextURL, guwenPictureURL } from '@/config'
+import singleLoader from '@/components/SingleLoader'
 
 export default {
   name: 'GenResult',
+  components: {
+    singleLoader
+  },
   data () {
     return {
       transResult: '庆历四年春，滕子京谪守巴陵郡。' +

@@ -3,7 +3,7 @@
 <!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
       <v-flex xs3>
-        <v-img src="~@/assets/loading.gif"></v-img>
+        <single-loader></single-loader>
       </v-flex>
     </v-layout>
 <!--    result-->
@@ -88,12 +88,14 @@
 import { mapState, mapActions } from 'vuex'
 import { postForm, postJson } from '@/helpers'
 import { poemKeyURL, poemAcrosticURL, poemPictureURL } from '@/config'
+import singleLoader from '@/components/SingleLoader'
 import smallStamp from '@/components/SmallStamp.vue'
 import bigStamp from '@/components/BigStamp.vue'
 
 export default {
   name: 'GenResult',
   components: {
+    singleLoader,
     smallStamp,
     bigStamp
   },
@@ -177,7 +179,4 @@ export default {
   .poem-wrapper
     padding: 0
     background-color: rgba(255, 255, 255, 0.6)
-
-  .kaiti
-    font-family: 'STKaiti' !important
 </style>
