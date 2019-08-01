@@ -6,10 +6,19 @@
           <v-layout column justify-center >
             <v-flex xs2>
               <label for="text-input"></label>
-              <input type="text" id="text-input"
-                     :placeholder="inputHint"
-                     v-model="textInput"
-              />
+              <div style="position: relative">
+                <a
+                  class="input-cleaner"
+                  v-show="textInput != null && textInput.length > 0"
+                  @click="textInput = ''"
+                >
+                  <v-icon>close</v-icon>
+                </a>
+                <input type="text" id="text-input"
+                       :placeholder="inputHint"
+                       v-model="textInput"
+                />
+              </div>
               <input id="photo-file" ref="photo_file"
                      type="file" accept="image/*"
                      style="display: none"
@@ -115,20 +124,20 @@
             </v-flex>
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
-                <v-layout column justify-center>
-                  <v-flex xs4 pa-2>
+                <v-layout column justify-center align-end>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="作诗"
                       @click="onTextGoClick()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="拍照"
                       @click="$refs.photo_file.click()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
                       @click="$router.push('/')"
@@ -242,6 +251,7 @@ export default {
 
 <style scoped lang="stylus">
   @import '~@/styles/input-text-fill-width'
+  @import '~@/styles/input-cleaner'
 
   #wrapper
     background-image: url("~@/assets/poem/bg.jpg")

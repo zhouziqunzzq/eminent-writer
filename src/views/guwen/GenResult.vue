@@ -45,25 +45,25 @@
             <v-flex xs4 fill-height v-show="showButton">
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-end align-end>
-                  <v-flex xs2 pa-0 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="复制"
                       font-size="14px"
                       @click="doCopy()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-0 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="分享"
                       font-size="14px"
                       @click="share()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-0 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
                       font-size="14px"
-                      @click="$router.push('/')"
+                      @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
                 </v-layout>
@@ -152,7 +152,7 @@ export default {
           type: this.direction
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.transResult = response.parsedBody.data
           this.isReady = true
         } else {
@@ -168,7 +168,7 @@ export default {
           'type': String(this.direction)
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.transResult = response.parsedBody.data
           this.isReady = true
         } else {

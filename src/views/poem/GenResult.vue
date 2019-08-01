@@ -10,15 +10,15 @@
     <v-layout column v-else>
       <v-flex xs8>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-end>
-            <v-flex :class="{ 'xs7': numberOfWords === 5, 'xs9': numberOfWords === 7 }">
+          <v-layout column justify-end align-center>
+            <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
                 <v-container fluid fill-height class="poem-wrapper">
                   <v-layout row justify-center align-center reverse>
                     <v-flex
                       xs1
                       v-for="(v, i) in myPoem"
                       :key="i"
-                      ml-3 mr-3
+                      style="margin: 0 0.8rem"
                     >
                       <v-container fluid fill-height pa-0>
                         <v-layout column justify-center>
@@ -27,7 +27,7 @@
                             v-for="(c, ii) in v"
                             :key="ii"
                           >
-                            <h5 class="headline text-xs-center kaiti">{{c}}</h5>
+                            <h5 class="poem-text text-xs-center kaiti">{{c}}</h5>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -54,24 +54,24 @@
             </v-flex>
             <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
-                <v-layout column justify-center>
-                  <v-flex xs4 pa-2>
+                <v-layout column justify-center align-end>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      font-size="16px"
+                      font-size="10px"
                       @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="分享"
                       @click="share()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
-                      @click="$router.push('/')"
+                      @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
                 </v-layout>
@@ -157,7 +157,7 @@ export default {
           type: Number(this.numberOfWords)
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.myPoem = response.parsedBody.data
           this.isReady = true
         } else {
@@ -173,7 +173,7 @@ export default {
           'type': String(this.numberOfWords)
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.myPoem = response.parsedBody.data
           this.isReady = true
         } else {
@@ -197,4 +197,8 @@ export default {
   .poem-wrapper
     padding: 0
     background-color: rgba(255, 255, 255, 0.6)
+
+  .poem-text
+    font-size: 1.2rem
+    font-weight: normal
 </style>

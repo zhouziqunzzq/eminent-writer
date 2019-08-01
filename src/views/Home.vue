@@ -7,20 +7,20 @@
           <v-layout row justify-end align-end>
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
-                <v-layout column justify-center>
-                  <v-flex xs4 sm2 pa-2>
+                <v-layout column justify-center align-end>
+                  <v-flex xs4 sm2 pa-2 style="width: 75%">
                     <ink-button
                       tag="对联"
                       @click="$router.push('/duilian/home')"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 sm2 pa-2>
+                  <v-flex xs4 sm2 pa-2 style="width: 75%">
                     <ink-button
                       tag="古诗"
                       @click="$router.push('/poem/home')"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 sm2 pa-2>
+                  <v-flex xs4 sm2 pa-2 style="width: 75%">
                     <ink-button
                       tag="古文"
                       @click="$router.push('/guwen/home')"
@@ -39,6 +39,7 @@
 <script>
 import { mapActions } from 'vuex'
 import InkButton from '../components/InkButton'
+import { RESET_HISTORY } from '@/mutation-types'
 
 export default {
   components: { InkButton },
@@ -50,6 +51,9 @@ export default {
       'showInfo',
       'showError'
     ])
+  },
+  mounted () {
+    this.$store.commit(RESET_HISTORY)
   }
 }
 </script>

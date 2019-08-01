@@ -3,21 +3,21 @@
     <pre-load-image
       :img-url-arr="imgURLs"
       :order="false"
-      tip-str="(1/2) 图片预加载中..."
+      tip-str="图片预加载中..."
       v-if="isLoadingImg"
       @imgAllLoaded="imgLoaded()"
     ></pre-load-image>
 
-    <font-loader
-      :font-families="['STKaiti', 'STXingkai']"
-      tip-str="(2/2) 字体预加载中..."
-      progress-type="count"
-      v-if="isLoadingFonts"
-      @font-loaded="fontLoaded()"
-    >
-    </font-loader>
+<!--    <font-loader-->
+<!--      :font-families="['STKaiti', 'STXingkai']"-->
+<!--      tip-str="(2/2) 字体预加载中..."-->
+<!--      progress-type="count"-->
+<!--      v-if="isLoadingFonts"-->
+<!--      @font-loaded="fontLoaded()"-->
+<!--    >-->
+<!--    </font-loader>-->
 
-    <v-content v-if="!isLoadingImg && !isLoadingFonts">
+    <v-content v-if="!isLoadingImg">
       <router-view></router-view>
 
       <audio
@@ -52,19 +52,18 @@ import { mapState, mapActions } from 'vuex'
 import { HIDE_SNACKBAR } from '@/mutation-types'
 import { imgURLs } from '@/assets-description'
 import preLoadImage from 'vue-preload-image'
-import fontLoader from '@/components/FontLoader.vue'
+// import fontLoader from '@/components/FontLoader.vue'
 
 export default {
   name: 'App',
   components: {
-    preLoadImage,
-    fontLoader
+    preLoadImage
   },
   data () {
     return {
       imgURLs: imgURLs,
       isLoadingImg: true,
-      isLoadingFonts: false,
+      // isLoadingFonts: false,
       isPlaying: false
     }
   },
@@ -108,12 +107,6 @@ export default {
     },
     imgLoaded () {
       this.isLoadingImg = false
-      // start loading fonts
-      this.isLoadingFonts = true
-    },
-    fontLoaded () {
-      // console.log('font loaded')
-      this.isLoadingFonts = false
       setTimeout(() => {
         this.toggleAudio()
       }, 1000)

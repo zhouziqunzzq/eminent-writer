@@ -18,7 +18,8 @@ import {
   HIDE_SNACKBAR,
   SET_SNACKBAR_MSG,
   SET_SNACKBAR_COLOR,
-  SET_SHOW_MUSIC_CONTROL
+  SET_SHOW_MUSIC_CONTROL,
+  RESET_HISTORY
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -29,7 +30,7 @@ export default new Vuex.Store({
       textInput: '',
       photoFile: null,
       genMethod: 'text',
-      isKeyword: false
+      isKeyword: true
     },
     poem: {
       textInput: '',
@@ -42,7 +43,7 @@ export default new Vuex.Store({
       textInput: '',
       photoFile: null,
       genMethod: 'text',
-      direction: 1 // 1:classic -> modern; 2: modern -> classic
+      direction: 2 // 1:classic -> modern; 2: modern -> classic
     },
     snackbar: {
       show: false,
@@ -112,6 +113,23 @@ export default new Vuex.Store({
     // app
     [SET_SHOW_MUSIC_CONTROL] (state, v) {
       state.app.showMusicControl = v
+    },
+    [RESET_HISTORY] (state) {
+      state.duilian.textInput = ''
+      state.duilian.photoFile = null
+      state.duilian.genMethod = 'text'
+      state.duilian.isKeyword = true
+
+      state.poem.textInput = ''
+      state.poem.photoFile = null
+      state.poem.genMethod = 'text'
+      state.poem.isCangtou = false
+      state.poem.numberOfWords = 5
+
+      state.guwen.textInput = ''
+      state.guwen.photoFile = null
+      state.guwen.genMethod = 'text'
+      state.guwen.direction = 2
     }
   },
   actions: {

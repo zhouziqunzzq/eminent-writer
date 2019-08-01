@@ -5,7 +5,7 @@
         <v-layout row justify-center align-center>
           <v-flex xs12>
             <h6
-              class="text-xs-center white--text pr-3 simsun"
+              class="text-xs-center white--text simsun"
               :style="buttonStyle"
             >{{tag}}</h6>
           </v-flex>
@@ -29,7 +29,7 @@ export default {
     },
     fontSize: {
       type: String,
-      default: '20px'
+      default: '14px'
     },
     fontWeight: {
       type: String,
@@ -38,6 +38,10 @@ export default {
     tag: {
       type: String,
       default: ''
+    },
+    paddingRight: {
+      type: String,
+      default: '16%'
     }
   },
   data () {
@@ -50,7 +54,8 @@ export default {
       return {
         fontFamily: this.fontFamily,
         fontSize: this.fontSize,
-        fontWeight: this.fontWeight
+        fontWeight: this.fontWeight,
+        paddingRight: this.paddingRight
       }
     }
   }

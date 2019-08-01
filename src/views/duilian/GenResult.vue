@@ -10,15 +10,15 @@
     <v-layout column v-else>
       <v-flex xs8>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-end>
-            <v-flex xs10>
+          <v-layout column justify-end align-center>
+            <v-flex xs6 style="width: 80%">
               <v-container fluid fill-height class="duilian-wrapper">
                 <v-layout column justify-center>
                   <v-flex xs3>
                     <v-container fluid fill-height pa-0 pt-4>
                       <v-layout row justify-center align-center reverse>
                         <h5 v-for="(c, i) in hengpi"
-                            class="headline kaiti" :key="i">
+                            class="duilian-text kaiti" :key="i">
                           {{c}}
                         </h5>
                       </v-layout>
@@ -31,7 +31,7 @@
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
                               <h5 v-for="(c, i) in shanglian"
-                                  class="headline kaiti" :key="i">
+                                  class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
                             </v-layout>
@@ -41,7 +41,7 @@
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
                               <h5 v-for="(c, i) in xialian"
-                                  class="headline kaiti" :key="i">
+                                  class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
                             </v-layout>
@@ -72,24 +72,24 @@
             </v-flex>
             <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
-                <v-layout column justify-center>
-                  <v-flex xs4 pa-2>
+                <v-layout column justify-center align-end>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      font-size="16px"
+                      font-size="10px"
                       @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="分享"
                       @click="share()"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2>
+                  <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
-                      @click="$router.push('/')"
+                      @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
                 </v-layout>
@@ -170,7 +170,7 @@ export default {
           input: this.textInput
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.shanglian = response.parsedBody.data.shanglian
           this.xialian = response.parsedBody.data.xialian
           this.hengpi = '小牛雅颂'
@@ -187,7 +187,7 @@ export default {
           'photo': this.photoFile
         })
         if (response.parsedBody.result) {
-          this.showInfo(response.parsedBody.msg)
+          // this.showInfo(response.parsedBody.msg)
           this.shanglian = response.parsedBody.data.shanglian
           this.xialian = response.parsedBody.data.xialian
           this.hengpi = '小牛雅颂'
@@ -213,4 +213,8 @@ export default {
   .duilian-wrapper
     padding: 0
     background-color: rgba(255, 255, 255, 0.6)
+
+  .duilian-text
+    font-size: 1.4rem
+    font-weight: normal
 </style>
