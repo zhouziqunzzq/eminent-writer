@@ -104,7 +104,7 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs4 pb-4>
         <v-container fluid fill-height pa-0>
           <v-layout row justify-space-between align-end>
             <v-flex xs2 pb-2>
@@ -140,7 +140,6 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>
@@ -175,7 +174,7 @@ export default {
       if (this.isJueju) {
         return '输入关键词（2-4个字）'
       } else {
-        return '输入关键词（1-4个字）'
+        return '输入藏头（1-4个字）'
       }
     }
   },

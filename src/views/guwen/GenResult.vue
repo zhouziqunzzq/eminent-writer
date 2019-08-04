@@ -22,6 +22,7 @@
                         v-model="transResult"
                         rows="15"
                         v-show="showButton"
+                        readonly="readonly"
                       ></textarea>
                       <div v-show="!showButton"
                            class="kaiti"
@@ -36,7 +37,7 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs4 pb-4>
         <v-container fluid fill-height pa-0>
           <v-layout row justify-space-between align-end>
             <v-flex xs2 pb-2>

@@ -56,7 +56,7 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs2>
+      <v-flex xs4 pb-4>
         <v-container fluid fill-height pa-0>
           <v-layout row justify-space-between align-end>
             <template v-if="genMethod === 'text' && isKeyword">
@@ -100,7 +100,6 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>

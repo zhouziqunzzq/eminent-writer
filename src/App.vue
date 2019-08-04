@@ -6,8 +6,14 @@
       :order="false"
       tip-str="图片预加载中..."
       v-if="isLoadingImg"
+      :animation-show="false"
       @imgAllLoaded="imgLoaded()"
-    ></pre-load-image>
+    >
+      <v-img src="~@/assets/logo-loader.gif"
+             :contain="true"
+             width="100%"
+      ></v-img>
+    </pre-load-image>
 
 <!--    font loader-->
 <!--    <font-loader-->
@@ -20,17 +26,17 @@
 <!--    </font-loader>-->
 
 <!--    splash animation-->
-    <v-container fluid fill-height v-if="isSplashing" pa-0>
-      <v-layout column justify-center align-center>
-        <v-img src="~@/assets/logo-loader.gif"
-               :contain="true"
-               width="100%"
-        ></v-img>
-      </v-layout>
-    </v-container>
+<!--    <v-container fluid fill-height v-if="isSplashing" pa-0>-->
+<!--      <v-layout column justify-center align-center>-->
+<!--        <v-img src="~@/assets/logo-loader.gif"-->
+<!--               :contain="true"-->
+<!--               width="100%"-->
+<!--        ></v-img>-->
+<!--      </v-layout>-->
+<!--    </v-container>-->
 
 <!--    main content-->
-    <v-content v-if="!isLoadingImg && !isSplashing">
+    <v-content v-if="!isLoadingImg">
       <router-view></router-view>
 
       <audio
@@ -126,7 +132,10 @@ export default {
     },
     imgLoaded () {
       this.isLoadingImg = false
-      this.startSplash()
+      // this.startSplash()
+      setTimeout(() => {
+        this.toggleAudio()
+      }, 1000)
     },
     startSplash () {
       this.isSplashing = true

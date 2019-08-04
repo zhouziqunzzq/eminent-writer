@@ -2,9 +2,9 @@
   <v-container fluid fill-height id="wrapper">
     <v-layout column>
       <v-flex xs8></v-flex>
-      <v-flex xs2>
+      <v-flex xs4 pb-4>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-end align-start>
+          <v-layout row justify-end align-end>
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center align-end>
@@ -32,7 +32,6 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>
