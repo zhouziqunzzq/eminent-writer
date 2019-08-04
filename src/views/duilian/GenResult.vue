@@ -10,7 +10,7 @@
     <v-layout column v-else>
       <v-flex xs8>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-center align-center>
+          <v-layout column justify-start align-center>
             <v-flex xs6 style="width: 80%">
               <v-container fluid fill-height class="duilian-wrapper">
                 <v-layout column justify-center>
@@ -215,7 +215,7 @@ export default {
 
   .duilian-wrapper
     padding: 0
-    background-color: rgba(255, 255, 255, 0.6)
+    //background-color: rgba(255, 255, 255, 0.6)
 
   .duilian-text
     font-size: 1.4rem

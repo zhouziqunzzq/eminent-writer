@@ -1,5 +1,7 @@
 <template>
-  <v-container fluid fill-height id="wrapper">
+  <v-container fluid fill-height id="wrapper"
+               :style="{ backgroundImage: 'url(' + bgImage + ')'}"
+  >
 <!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
       <v-flex xs3>
@@ -8,9 +10,10 @@
     </v-layout>
 <!--    result-->
     <v-layout column v-else>
-      <v-flex xs8>
+      <v-spacer></v-spacer>
+      <v-flex xs6>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-center align-center>
+          <v-layout column justify-start align-center>
             <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
                 <v-container fluid fill-height class="poem-wrapper">
                   <v-layout row justify-center align-center>
@@ -66,6 +69,12 @@
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
+                      tag="更换背景"
+                      @click="showBgPicker = true"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 pa-2 style="width: 75%">
+                    <ink-button
                       tag="分享"
                       @click="share()"
                     ></ink-button>
@@ -84,6 +93,11 @@
       </v-flex>
       <v-spacer></v-spacer>
     </v-layout>
+    <bg-picker
+      :show="showBgPicker"
+      @close="showBgPicker = false"
+      @change-bg="onChangeBg"
+    />
   </v-container>
 </template>
 
@@ -94,6 +108,7 @@ import { poemKeyURL, poemAcrosticURL, poemPictureURL } from '@/config'
 import singleLoader from '@/components/SingleLoader'
 import smallStamp from '@/components/SmallStamp.vue'
 import bigStamp from '@/components/BigStamp.vue'
+import bgPicker from '@/components/BgPicker.vue'
 import html2canvas from 'html2canvas'
 
 export default {
@@ -101,7 +116,8 @@ export default {
   components: {
     singleLoader,
     smallStamp,
-    bigStamp
+    bigStamp,
+    bgPicker
   },
   data () {
     return {
@@ -112,7 +128,9 @@ export default {
         '独钓寒江雪'
       ],
       isReady: false,
-      showButton: true
+      showButton: true,
+      showBgPicker: false,
+      bgImage: require('@/assets/home/bg.jpg')
     }
   },
   computed: {
@@ -149,6 +167,9 @@ export default {
             this.showInfo('已将生成结果保存为图片，请您下载后随意分享吧～')
           })
       }, 10)
+    },
+    onChangeBg (url) {
+      this.bgImage = url
     }
   },
   async mounted () {
@@ -192,14 +213,13 @@ export default {
 
 <style scoped lang="stylus">
   #wrapper
-    background-image: url("~@/assets/home/bg.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
     padding: 1rem
 
   .poem-wrapper
     padding: 0
-    background-color: rgba(255, 255, 255, 0.6)
+    //background-color: rgba(255, 255, 255, 0.6)
 
   .poem-text
     font-size: 1.2rem

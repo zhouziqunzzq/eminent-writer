@@ -10,3 +10,7 @@ export const duilianPictureURL = baseURL + '/picture_couplet'
 // guwen
 export const guwenTextURL = baseURL + '/text_classical'
 export const guwenPictureURL = baseURL + '/picture_classical'
+
+// background images
+export const bgBasePath = '/img/bg/'
+export const bgCount = 34

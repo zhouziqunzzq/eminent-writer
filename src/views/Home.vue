@@ -39,11 +39,13 @@
 
 <script>
 import { mapActions } from 'vuex'
-import InkButton from '../components/InkButton'
+import InkButton from '@/components/InkButton'
 import { RESET_HISTORY } from '@/mutation-types'
 
 export default {
-  components: { InkButton },
+  components: {
+    InkButton
+  },
   data () {
     return {}
   },
