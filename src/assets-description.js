@@ -1,6 +1,7 @@
 export const imgURLs = [
   // app
   require('@/assets/logo.jpeg'),
+  require('@/assets/logo-loader.gif'),
   require('@/assets/music.png'),
   // common
   require('@/assets/common/button-ink.png'),

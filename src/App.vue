@@ -1,5 +1,6 @@
 <template>
-  <v-app>
+  <v-app id="app-wrapper">
+<!--    image loader-->
     <pre-load-image
       :img-url-arr="imgURLs"
       :order="false"
@@ -8,6 +9,7 @@
       @imgAllLoaded="imgLoaded()"
     ></pre-load-image>
 
+<!--    font loader-->
 <!--    <font-loader-->
 <!--      :font-families="['STKaiti', 'STXingkai']"-->
 <!--      tip-str="(2/2) 字体预加载中..."-->
@@ -17,7 +19,18 @@
 <!--    >-->
 <!--    </font-loader>-->
 
-    <v-content v-if="!isLoadingImg">
+<!--    splash animation-->
+    <v-container fluid fill-height v-if="isSplashing" pa-0>
+      <v-layout column justify-center align-center>
+        <v-img src="~@/assets/logo-loader.gif"
+               :contain="true"
+               width="100%"
+        ></v-img>
+      </v-layout>
+    </v-container>
+
+<!--    main content-->
+    <v-content v-if="!isLoadingImg && !isSplashing">
       <router-view></router-view>
 
       <audio
@@ -69,6 +82,7 @@ export default {
       imgURLs: imgURLs,
       isLoadingImg: true,
       // isLoadingFonts: false,
+      isSplashing: false,
       isPlaying: false
     }
   },
@@ -112,9 +126,16 @@ export default {
     },
     imgLoaded () {
       this.isLoadingImg = false
+      this.startSplash()
+    },
+    startSplash () {
+      this.isSplashing = true
       setTimeout(() => {
-        this.toggleAudio()
-      }, 1000)
+        this.isSplashing = false
+        setTimeout(() => {
+          this.toggleAudio()
+        }, 1000)
+      }, 4000)
     }
   },
   mounted () {
@@ -124,6 +145,9 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+  #app-wrapper
+    background-color: #ffffff !important
+
   #music-control
     position: absolute
     top: 1rem
