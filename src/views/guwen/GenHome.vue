@@ -38,9 +38,12 @@
       </v-flex>
       <v-flex xs3>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-end>
-            <v-flex xs2>
-              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+          <v-layout row justify-space-between align-start>
+            <v-flex xs2 align-self-center>
+              <v-img src="~@/assets/common/niutrans_logo.png"
+                     :contain="true"
+                     width="3rem"
+              ></v-img>
             </v-flex>
             <v-flex xs4 fill-height>
               <v-container fluid fill-height pa-0>

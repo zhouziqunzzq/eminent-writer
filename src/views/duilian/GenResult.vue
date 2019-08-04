@@ -8,9 +8,9 @@
     </v-layout>
 <!--    result-->
     <v-layout column v-else>
-      <v-flex xs8>
+      <v-flex xs9>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-end align-center>
+          <v-layout column justify-center align-center>
             <v-flex xs6 style="width: 80%">
               <v-container fluid fill-height class="duilian-wrapper">
                 <v-layout column justify-center>
@@ -56,19 +56,22 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs4>
+      <v-flex xs3>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-end>
+          <v-layout row justify-space-between align-start>
             <template v-if="genMethod === 'text' && isKeyword">
-              <v-flex xs2 align-self-end v-if="textInput.length <= 3">
+              <v-flex xs2 align-self-center v-if="textInput.length <= 3">
                 <small-stamp :text="textInput"></small-stamp>
               </v-flex>
-              <v-flex xs3 align-self-end v-else>
+              <v-flex xs3 align-self-center v-else>
                 <big-stamp :text="textInput"></big-stamp>
               </v-flex>
             </template>
-            <v-flex xs2 v-else>
-              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+            <v-flex xs2 align-self-center v-else>
+              <v-img src="~@/assets/common/niutrans_logo.png"
+                     :contain="true"
+                     width="3rem"
+              ></v-img>
             </v-flex>
             <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
@@ -76,7 +79,6 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      font-size="10px"
                       @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>

@@ -26,7 +26,12 @@
       >
       </audio>
       <a id="music-control" @click="toggleAudio()" v-show="app.showMusicControl">
-        <v-img :class="{'rotate-forever': isPlaying}" src="~@/assets/music.png"></v-img>
+        <v-img
+          :class="{'rotate-forever': isPlaying}"
+          src="~@/assets/music.png"
+          :contain="true"
+          width="40px"
+        ></v-img>
       </a>
 
       <v-snackbar
@@ -122,7 +127,7 @@ export default {
   #music-control
     position: absolute
     top: 1rem
-    right: 1rem
+    right: -0.2rem
     width: 15%
 
   .rotate-forever
