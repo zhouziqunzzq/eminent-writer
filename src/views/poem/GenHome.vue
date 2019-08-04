@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height id="wrapper">
     <v-layout column>
-      <v-flex xs9>
+      <v-flex xs8>
         <v-container fluid fill-height pa-0 pl-4 pr-4>
           <v-layout column justify-center >
             <v-flex xs2>
@@ -104,10 +104,10 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs2>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-start>
-            <v-flex xs2 align-self-center>
+          <v-layout row justify-space-between align-end>
+            <v-flex xs2 pb-2>
               <v-img src="~@/assets/common/niutrans_logo.png"
                      :contain="true"
                      width="3rem"
@@ -140,6 +140,7 @@
           </v-layout>
         </v-container>
       </v-flex>
+      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>

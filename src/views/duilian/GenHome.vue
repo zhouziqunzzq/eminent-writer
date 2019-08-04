@@ -1,7 +1,7 @@
 <template>
   <v-container fluid fill-height id="wrapper">
     <v-layout column>
-      <v-flex xs9>
+      <v-flex xs8>
         <v-container fluid fill-height pa-0 pl-4 pr-4>
           <v-layout column justify-center >
             <v-flex xs2>
@@ -39,18 +39,6 @@
                 <v-layout row wrap justify-space-between align-center>
                   <v-flex xs-4>
                     <v-checkbox
-                      v-model="isShanglian"
-                      color="gray"
-                      class="pa-0 ma-0"
-                    >
-                      <template v-slot:label>
-                        <label class="simsun black--text">上联</label>
-                      </template>
-                    </v-checkbox>
-                  </v-flex>
-                  <v-spacer></v-spacer>
-                  <v-flex xs-4>
-                    <v-checkbox
                       v-model="isKeyword"
                       color="gray"
                       class="pa-0 ma-0"
@@ -60,16 +48,28 @@
                       </template>
                     </v-checkbox>
                   </v-flex>
+                  <v-spacer></v-spacer>
+                  <v-flex xs-4>
+                    <v-checkbox
+                      v-model="isShanglian"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">上联</label>
+                      </template>
+                    </v-checkbox>
+                  </v-flex>
                 </v-layout>
               </v-container>
             </v-flex>
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs2>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-start>
-            <v-flex xs2 align-self-center>
+          <v-layout row justify-space-between align-end>
+            <v-flex xs2 pb-2>
               <v-img src="~@/assets/common/niutrans_logo.png"
                      :contain="true"
                      width="3rem"
@@ -102,6 +102,7 @@
           </v-layout>
         </v-container>
       </v-flex>
+      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>

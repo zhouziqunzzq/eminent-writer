@@ -8,7 +8,7 @@
     </v-layout>
 <!--    result-->
     <v-layout column justify-center v-else>
-      <v-flex xs9>
+      <v-flex xs8>
         <v-container fluid fill-height pa-0 pl-4 pr-4>
           <v-layout column justify-start align-center>
             <v-flex xs8 style="width: 95%">
@@ -36,10 +36,10 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs2>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-start>
-            <v-flex xs2 align-self-center>
+          <v-layout row justify-space-between align-end>
+            <v-flex xs2 pb-2>
               <v-img src="~@/assets/common/niutrans_logo.png"
                      :contain="true"
                      width="3rem"
@@ -51,21 +51,18 @@
                   <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="复制"
-                      font-size="14px"
                       @click="doCopy()"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="分享"
-                      font-size="14px"
                       @click="share()"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
-                      font-size="14px"
                       @click="$router.go(-1)"
                     ></ink-button>
                   </v-flex>
@@ -75,6 +72,7 @@
           </v-layout>
         </v-container>
       </v-flex>
+      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>

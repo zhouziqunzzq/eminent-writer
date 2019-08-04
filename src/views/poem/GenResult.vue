@@ -8,12 +8,12 @@
     </v-layout>
 <!--    result-->
     <v-layout column v-else>
-      <v-flex xs9>
+      <v-flex xs8>
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-center align-center>
             <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
                 <v-container fluid fill-height class="poem-wrapper">
-                  <v-layout row justify-center align-center reverse>
+                  <v-layout row justify-center align-center>
                     <v-flex
                       xs1
                       v-for="(v, i) in myPoem"
@@ -38,19 +38,22 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs3>
+      <v-flex xs2>
         <v-container fluid fill-height pa-0>
-          <v-layout row justify-space-between align-start>
+          <v-layout row justify-space-between align-end>
             <template v-if="genMethod === 'text'">
-              <v-flex xs2 align-self-center v-if="textInput.length <= 3">
+              <v-flex xs2 pb-2 v-if="textInput.length <= 3">
                 <small-stamp :text="textInput"></small-stamp>
               </v-flex>
-              <v-flex xs3 align-self-center v-else>
+              <v-flex xs3 pb-2 v-else>
                 <big-stamp :text="textInput"></big-stamp>
               </v-flex>
             </template>
-            <v-flex xs2 v-else>
-              <v-img src="~@/assets/common/niutrans_logo.png"></v-img>
+            <v-flex xs2 pb-2 v-else>
+              <v-img src="~@/assets/common/niutrans_logo.png"
+                     :contain="true"
+                     width="3rem"
+              ></v-img>
             </v-flex>
             <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
@@ -79,6 +82,7 @@
           </v-layout>
         </v-container>
       </v-flex>
+      <v-spacer></v-spacer>
     </v-layout>
   </v-container>
 </template>
