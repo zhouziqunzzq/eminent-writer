@@ -11,9 +11,9 @@
 <!--    result-->
     <v-layout column v-else>
       <v-spacer></v-spacer>
-      <v-flex xs6>
+      <v-flex xs6 pt-4>
         <v-container fluid fill-height style="padding: 10% 15%">
-          <v-layout column justify-start align-center>
+          <v-layout column justify-center align-center>
             <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
                 <v-container fluid fill-height class="poem-wrapper">
                   <v-layout row justify-center align-center>

@@ -15,6 +15,16 @@
       ></v-img>
     </pre-load-image>
 
+<!--    splash animation-->
+    <v-container fluid fill-height pa-0 v-show="isSplashing">
+      <v-layout column justify-center align-center>
+        <v-img src="~@/assets/logo-loader.gif"
+               :contain="true"
+               width="100%"
+        ></v-img>
+      </v-layout>
+    </v-container>
+
 <!--    font loader-->
 <!--    <font-loader-->
 <!--      :font-families="['STKaiti', 'STXingkai']"-->
@@ -26,7 +36,7 @@
 <!--    </font-loader>-->
 
 <!--    main content-->
-    <v-content v-if="!isLoadingSplash && !isLoadingImg">
+    <v-content v-if="!isLoadingSplash && !isLoadingImg && !isSplashing">
       <router-view></router-view>
 
       <audio
@@ -78,6 +88,8 @@ export default {
       imgURLs: imgURLs,
       isLoadingSplash: true,
       isLoadingImg: false,
+      beginLoading: null,
+      endLoading: null,
       // isLoadingFonts: false,
       isSplashing: false,
       isPlaying: false
@@ -123,19 +135,22 @@ export default {
     },
     imgLoaded () {
       this.isLoadingImg = false
-      // this.startSplash()
-      setTimeout(() => {
-        this.toggleAudio()
-      }, 1000)
-    },
-    startSplash () {
-      this.isSplashing = true
-      setTimeout(() => {
-        this.isSplashing = false
+      this.endLoading = Date.now()
+      const loadingTime = this.endLoading - this.beginLoading
+      const remainTime = Math.max(0, 4000 - loadingTime)
+      if (remainTime > 0) {
+        this.isSplashing = true
+        setTimeout(() => {
+          this.isSplashing = false
+          setTimeout(() => {
+            this.toggleAudio()
+          }, 1000)
+        }, remainTime)
+      } else {
         setTimeout(() => {
           this.toggleAudio()
         }, 1000)
-      }, 4000)
+      }
     }
   },
   mounted () {
@@ -144,10 +159,12 @@ export default {
     splashImg.addEventListener('load', () => {
       this.isLoadingSplash = false
       this.isLoadingImg = true
+      this.beginLoading = Date.now()
     })
     splashImg.addEventListener('error', () => {
       this.isLoadingSplash = false
       this.isLoadingImg = true
+      this.beginLoading = Date.now()
     })
     splashImg.src = require('@/assets/logo-loader.gif')
   }
