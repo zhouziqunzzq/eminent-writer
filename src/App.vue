@@ -25,18 +25,8 @@
 <!--    >-->
 <!--    </font-loader>-->
 
-<!--    splash animation-->
-<!--    <v-container fluid fill-height v-if="isSplashing" pa-0>-->
-<!--      <v-layout column justify-center align-center>-->
-<!--        <v-img src="~@/assets/logo-loader.gif"-->
-<!--               :contain="true"-->
-<!--               width="100%"-->
-<!--        ></v-img>-->
-<!--      </v-layout>-->
-<!--    </v-container>-->
-
 <!--    main content-->
-    <v-content v-if="!isLoadingImg">
+    <v-content v-if="!isLoadingSplash && !isLoadingImg">
       <router-view></router-view>
 
       <audio
@@ -86,7 +76,8 @@ export default {
   data () {
     return {
       imgURLs: imgURLs,
-      isLoadingImg: true,
+      isLoadingSplash: true,
+      isLoadingImg: false,
       // isLoadingFonts: false,
       isSplashing: false,
       isPlaying: false
@@ -148,7 +139,17 @@ export default {
     }
   },
   mounted () {
-    // console.log(imgURLs)
+    // preload splash
+    let splashImg = new Image()
+    splashImg.addEventListener('load', () => {
+      this.isLoadingSplash = false
+      this.isLoadingImg = true
+    })
+    splashImg.addEventListener('error', () => {
+      this.isLoadingSplash = false
+      this.isLoadingImg = true
+    })
+    splashImg.src = require('@/assets/logo-loader.gif')
   }
 }
 </script>
