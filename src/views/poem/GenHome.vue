@@ -29,7 +29,7 @@
               <v-container fluid fill-height pa-0>
                 <v-layout row justify-center align-center>
                   <v-flex xs12>
-                    <p class="body-1 ma-0 simsun">格式</p>
+                    <p class="ma-0 simsun" style="font-size: 16px">格式</p>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -38,33 +38,27 @@
               <v-container fluid fill-height pa-0 pl-4 pr-4>
                 <v-layout row wrap justify-space-between align-center>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-five" type="checkbox"
-                                 v-model="isFive" @change="isSeven = !isSeven"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-five">五言</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isFive"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">五言</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                   <v-spacer></v-spacer>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-seven" type="checkbox"
-                                 v-model="isSeven" @change="isFive = !isFive"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-seven">七言</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isSeven"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">七言</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -73,7 +67,7 @@
               <v-container fluid fill-height pa-0>
                 <v-layout row justify-center align-center>
                   <v-flex xs12>
-                    <p class="body-1 ma-0 simsun">类型</p>
+                    <p class="ma-0 simsun" style="font-size: 16px">类型</p>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -82,33 +76,27 @@
               <v-container fluid fill-height pa-0 pl-4 pr-4>
                 <v-layout row wrap justify-space-between align-center>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-jueju" type="checkbox"
-                                 v-model="isJueju" @change="isCangtou = !isCangtou"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-jueju">绝句</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isJueju"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">绝句</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                   <v-spacer></v-spacer>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-cangtou" type="checkbox"
-                                 v-model="isCangtou" @change="isJueju = !isJueju"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-cangtou">藏头</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isCangtou"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">藏头</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -187,11 +175,40 @@ export default {
       }
     }
   },
+  watch: {
+    isFive (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isSeven !== desiredValue) {
+        this.isSeven = desiredValue
+      }
+    },
+    isSeven (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isFive !== desiredValue) {
+        this.isFive = desiredValue
+      }
+    },
+    isJueju (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isCangtou !== desiredValue) {
+        this.isCangtou = desiredValue
+      }
+    },
+    isCangtou (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isJueju !== desiredValue) {
+        this.isJueju = desiredValue
+      }
+    }
+  },
   methods: {
     ...mapActions([
       'showInfo',
       'showError'
     ]),
+    testLog (s) {
+      console.log(s)
+    },
     saveCommonSettings () {
       this.$store.commit(POEM_SET_IS_CANGTOU, this.isCangtou)
       if (this.isFive) {

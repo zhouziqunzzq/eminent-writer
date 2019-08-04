@@ -29,7 +29,7 @@
               <v-container fluid fill-height pa-0>
                 <v-layout row justify-center align-center>
                   <v-flex xs12>
-                    <p class="body-1 ma-0 simsun">类型</p>
+                    <p class="ma-0 simsun" style="font-size: 16px">类型</p>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -38,33 +38,27 @@
               <v-container fluid fill-height pa-0 pl-4 pr-4>
                 <v-layout row wrap justify-space-between align-center>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-shanglian" type="checkbox"
-                                 v-model="isShanglian" @change="isKeyword = !isKeyword"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-shanglian">上联</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isShanglian"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">上联</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                   <v-spacer></v-spacer>
                   <v-flex xs-4>
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-start align-center>
-                        <v-flex xs4>
-                          <input id="check-keyword" type="checkbox"
-                                 v-model="isKeyword" @change="isShanglian = !isShanglian"
-                          />
-                        </v-flex>
-                        <v-flex xs8>
-                          <label class="simsun" for="check-keyword">关键词</label>
-                        </v-flex>
-                      </v-layout>
-                    </v-container>
+                    <v-checkbox
+                      v-model="isKeyword"
+                      color="gray"
+                      class="pa-0 ma-0"
+                    >
+                      <template v-slot:label>
+                        <label class="simsun black--text">关键词</label>
+                      </template>
+                    </v-checkbox>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -136,6 +130,20 @@ export default {
         return '输入上联（1-10个字）'
       } else {
         return '输入关键词（2-4个字）'
+      }
+    }
+  },
+  watch: {
+    isShanglian (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isKeyword !== desiredValue) {
+        this.isKeyword = desiredValue
+      }
+    },
+    isKeyword (newValue, oldValue) {
+      const desiredValue = !newValue
+      if (this.isShanglian !== desiredValue) {
+        this.isShanglian = desiredValue
       }
     }
   },
