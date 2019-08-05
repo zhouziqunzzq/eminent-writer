@@ -64,7 +64,7 @@
                   <v-flex xs2 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
-                      @click="$router.go(-1)"
+                      @click="$router.push('/guwen/home')"
                     ></ink-button>
                   </v-flex>
                 </v-layout>

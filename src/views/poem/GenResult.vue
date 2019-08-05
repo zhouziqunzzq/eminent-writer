@@ -84,7 +84,7 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="返回"
-                      @click="$router.go(-1)"
+                      @click="$router.push('/poem/home')"
                     ></ink-button>
                   </v-flex>
                 </v-layout>
