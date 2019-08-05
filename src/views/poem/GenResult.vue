@@ -3,13 +3,15 @@
                :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
   >
 <!--    loader-->
-    <v-layout row justify-center align-center v-if="!isReady">
+    <v-layout row justify-center align-center v-show="!isReady || isLoadingBg"
+              class="my-loader"
+    >
       <v-flex xs3>
         <single-loader></single-loader>
       </v-flex>
     </v-layout>
 <!--    result-->
-    <v-layout column v-else>
+    <v-layout column v-show="isReady">
       <v-spacer></v-spacer>
       <v-flex xs6 pt-4>
         <v-container fluid fill-height style="padding: 10% 15%">
@@ -127,7 +129,8 @@ export default {
       showBgPicker: false,
       bgImageID: 10,
       bgCount: bgCount,
-      bgImageInUse: bgBasePath + '10.jpg'
+      bgImageInUse: bgBasePath + '10.jpg',
+      isLoadingBg: false
     }
   },
   computed: {
@@ -169,15 +172,20 @@ export default {
       }, 10)
     },
     async onChangeBg () {
+      const t = setTimeout(() => {
+        this.isLoadingBg = true
+      }, 100)
       this.bgImageID = this.bgImageID + 1 <= this.bgCount ? this.bgImageID + 1 : 1
       await preloadImage(this.bgImage)
         .then(() => {
           this.bgImageInUse = this.bgImage
+          clearTimeout(t)
         })
         .catch((e) => {
           this.showError('加载背景图失败，请重试')
           console.log(e)
         })
+      this.isLoadingBg = false
     }
   },
   async mounted () {
@@ -227,6 +235,13 @@ export default {
     background-size: 100% 100%
     padding: 1rem
     transition: background-image 0.5s
+
+  .my-loader
+    position: absolute
+    left: 0
+    top: 0
+    height: 100%
+    width: 100%
 
   .poem-wrapper
     padding: 0

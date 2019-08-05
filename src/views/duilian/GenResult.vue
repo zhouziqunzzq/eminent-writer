@@ -3,13 +3,13 @@
                :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
   >
 <!--    loader-->
-    <v-layout row justify-center align-center v-if="!isReady">
+    <v-layout row justify-center align-center v-show="!isReady | isLoadingBg">
       <v-flex xs3>
         <single-loader></single-loader>
       </v-flex>
     </v-layout>
 <!--    result-->
-    <v-layout column v-else>
+    <v-layout column v-show="isReady">
       <v-flex xs8>
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-start align-center>
@@ -131,9 +131,6 @@ export default {
   },
   data () {
     return {
-      hengpi: '小牛雅颂',
-      shanglian: '旧岁又添几个喜',
-      xialian: '新年更上一层楼',
       myDuilians: null,
       duilianCnt: 0,
       duilianPtr: 0,
@@ -141,7 +138,8 @@ export default {
       showButton: true,
       bgImageID: 11,
       bgCount: bgCount,
-      bgImageInUse: bgBasePath + '11.jpg'
+      bgImageInUse: bgBasePath + '11.jpg',
+      isLoadingBg: false
     }
   },
   computed: {
@@ -186,15 +184,20 @@ export default {
       }, 10)
     },
     async onChangeBg () {
+      const t = setTimeout(() => {
+        this.isLoadingBg = true
+      }, 100)
       this.bgImageID = this.bgImageID + 1 <= this.bgCount ? this.bgImageID + 1 : 1
       await preloadImage(this.bgImage)
         .then(() => {
           this.bgImageInUse = this.bgImage
+          clearTimeout(t)
         })
         .catch((e) => {
           this.showError('加载背景图失败，请重试')
           console.log(e)
         })
+      this.isLoadingBg = false
     }
   },
   async mounted () {
@@ -242,6 +245,13 @@ export default {
     background-size: 100% 100%
     padding: 1rem
     transition: background-image 0.5s
+
+  .my-loader
+    position: absolute
+    left: 0
+    top: 0
+    height: 100%
+    width: 100%
 
   .duilian-wrapper
     padding: 0
