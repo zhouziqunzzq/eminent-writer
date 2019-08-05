@@ -64,3 +64,16 @@ export const postForm = async (path, data) => {
   }
   return http(new Request(path, args))
 }
+
+export const preloadImage = (url) => {
+  return new Promise((resolve, reject) => {
+    const i = new Image()
+    i.addEventListener('load', () => {
+      resolve()
+    })
+    i.addEventListener('error', (e) => {
+      reject(e)
+    })
+    i.src = url
+  })
+}

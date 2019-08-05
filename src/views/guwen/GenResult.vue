@@ -149,7 +149,7 @@ export default {
       try {
         const response = await postJson(guwenTextURL, {
           input: this.textInput,
-          type: this.direction
+          type: this.direction.toString()
         })
         this.transResult = response.parsedBody.data
         if (!response.parsedBody.result) {

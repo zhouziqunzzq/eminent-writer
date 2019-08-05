@@ -13,4 +13,4 @@ export const guwenPictureURL = baseURL + '/picture_classical'
 
 // background images
 export const bgBasePath = '/img/bg/'
-export const bgCount = 34
+export const bgCount = 15

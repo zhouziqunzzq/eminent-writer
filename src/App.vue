@@ -76,6 +76,7 @@ import { mapState, mapActions } from 'vuex'
 import { HIDE_SNACKBAR } from '@/mutation-types'
 import { imgURLs } from '@/assets-description'
 import preLoadImage from 'vue-preload-image'
+import { preloadImage } from '@/helpers'
 // import fontLoader from '@/components/FontLoader.vue'
 
 export default {
@@ -153,20 +154,12 @@ export default {
       }
     }
   },
-  mounted () {
+  async mounted () {
     // preload splash
-    let splashImg = new Image()
-    splashImg.addEventListener('load', () => {
-      this.isLoadingSplash = false
-      this.isLoadingImg = true
-      this.beginLoading = Date.now()
-    })
-    splashImg.addEventListener('error', () => {
-      this.isLoadingSplash = false
-      this.isLoadingImg = true
-      this.beginLoading = Date.now()
-    })
-    splashImg.src = require('@/assets/logo-loader.gif')
+    await preloadImage(require('@/assets/logo-loader.gif'))
+    this.isLoadingSplash = false
+    this.isLoadingImg = true
+    this.beginLoading = Date.now()
   }
 }
 </script>

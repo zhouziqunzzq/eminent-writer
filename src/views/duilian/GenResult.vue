@@ -1,6 +1,8 @@
 <template>
-  <v-container fluid fill-height id="wrapper">
-    <!--    loader-->
+  <v-container fluid fill-height id="wrapper"
+               :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
+  >
+<!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
       <v-flex xs3>
         <single-loader></single-loader>
@@ -84,6 +86,12 @@
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
+                      tag="更换背景"
+                      @click="onChangeBg()"
+                    ></ink-button>
+                  </v-flex>
+                  <v-flex xs4 pa-2 style="width: 75%">
+                    <ink-button
                       tag="分享"
                       @click="share()"
                     ></ink-button>
@@ -106,8 +114,9 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { postForm, postJson } from '@/helpers'
-import { duilianDuiURL, duilianKeyURL, duilianPictureURL } from '@/config'
+import { postForm, postJson, preloadImage } from '@/helpers'
+import { duilianDuiURL, duilianKeyURL, duilianPictureURL,
+  bgBasePath, bgCount } from '@/config'
 import singleLoader from '@/components/SingleLoader'
 import smallStamp from '@/components/SmallStamp.vue'
 import bigStamp from '@/components/BigStamp.vue'
@@ -129,7 +138,10 @@ export default {
       duilianCnt: 0,
       duilianPtr: 0,
       isReady: false,
-      showButton: true
+      showButton: true,
+      bgImageID: 11,
+      bgCount: bgCount,
+      bgImageInUse: bgBasePath + '11.jpg'
     }
   },
   computed: {
@@ -142,6 +154,9 @@ export default {
     safeHengpi () {
       return this.myDuilians[this.duilianPtr].hengpi.length === 0
         ? '小牛雅颂' : this.myDuilians[this.duilianPtr].hengpi
+    },
+    bgImage () {
+      return bgBasePath + this.bgImageID.toString() + '.jpg'
     }
   },
   methods: {
@@ -169,6 +184,17 @@ export default {
             this.showInfo('已将生成结果保存为图片，请您下载后随意分享吧～')
           })
       }, 10)
+    },
+    async onChangeBg () {
+      this.bgImageID = this.bgImageID + 1 <= this.bgCount ? this.bgImageID + 1 : 1
+      await preloadImage(this.bgImage)
+        .then(() => {
+          this.bgImageInUse = this.bgImage
+        })
+        .catch((e) => {
+          this.showError('加载背景图失败，请重试')
+          console.log(e)
+        })
     }
   },
   async mounted () {
@@ -212,10 +238,10 @@ export default {
 
 <style scoped lang="stylus">
   #wrapper
-    background-image: url("~@/assets/duilian/bg-result.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
     padding: 1rem
+    transition: background-image 0.5s
 
   .duilian-wrapper
     padding: 0

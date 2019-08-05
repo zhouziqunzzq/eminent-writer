@@ -1,3 +1,5 @@
+import { bgBasePath } from './config'
+
 export const imgURLs = [
   // app
   require('@/assets/logo.jpeg'),
@@ -10,10 +12,12 @@ export const imgURLs = [
   // duilian
   require('@/assets/duilian/bg.jpg'),
   require('@/assets/duilian/bg-result.jpg'),
+  bgBasePath + '11.jpg',
   // guwen
   require('@/assets/guwen/bg-text-input.png'),
   // home
   require('@/assets/home/bg.jpg'),
   // poem
-  require('@/assets/poem/bg.jpg')
+  require('@/assets/poem/bg.jpg'),
+  bgBasePath + '10.jpg'
 ]

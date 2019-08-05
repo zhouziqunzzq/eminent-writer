@@ -1,6 +1,6 @@
 <template>
   <v-container fluid fill-height id="wrapper"
-               :style="{ backgroundImage: 'url(' + bgImage + ')'}"
+               :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
   >
 <!--    loader-->
     <v-layout row justify-center align-center v-if="!isReady">
@@ -70,7 +70,7 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="更换背景"
-                      @click="showBgPicker = true"
+                      @click="onChangeBg()"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -92,22 +92,17 @@
         </v-container>
       </v-flex>
     </v-layout>
-    <bg-picker
-      :show="showBgPicker"
-      @close="showBgPicker = false"
-      @change-bg="onChangeBg"
-    />
   </v-container>
 </template>
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { postForm, postJson } from '@/helpers'
-import { poemKeyURL, poemAcrosticURL, poemPictureURL } from '@/config'
+import { postForm, postJson, preloadImage } from '@/helpers'
+import { poemKeyURL, poemAcrosticURL,
+  poemPictureURL, bgBasePath, bgCount } from '@/config'
 import singleLoader from '@/components/SingleLoader'
 import smallStamp from '@/components/SmallStamp.vue'
 import bigStamp from '@/components/BigStamp.vue'
-import bgPicker from '@/components/BgPicker.vue'
 import html2canvas from 'html2canvas'
 
 export default {
@@ -115,8 +110,7 @@ export default {
   components: {
     singleLoader,
     smallStamp,
-    bigStamp,
-    bgPicker
+    bigStamp
   },
   data () {
     return {
@@ -131,7 +125,9 @@ export default {
       isReady: false,
       showButton: true,
       showBgPicker: false,
-      bgImage: require('@/assets/home/bg.jpg')
+      bgImageID: 10,
+      bgCount: bgCount,
+      bgImageInUse: bgBasePath + '10.jpg'
     }
   },
   computed: {
@@ -141,7 +137,10 @@ export default {
       photoFile: state => state.poem.photoFile,
       isCangtou: state => state.poem.isCangtou,
       numberOfWords: state => state.poem.numberOfWords
-    })
+    }),
+    bgImage () {
+      return bgBasePath + this.bgImageID.toString() + '.jpg'
+    }
   },
   methods: {
     ...mapActions([
@@ -169,8 +168,16 @@ export default {
           })
       }, 10)
     },
-    onChangeBg (url) {
-      this.bgImage = url
+    async onChangeBg () {
+      this.bgImageID = this.bgImageID + 1 <= this.bgCount ? this.bgImageID + 1 : 1
+      await preloadImage(this.bgImage)
+        .then(() => {
+          this.bgImageInUse = this.bgImage
+        })
+        .catch((e) => {
+          this.showError('加载背景图失败，请重试')
+          console.log(e)
+        })
     }
   },
   async mounted () {
@@ -219,6 +226,7 @@ export default {
     background-repeat: no-repeat
     background-size: 100% 100%
     padding: 1rem
+    transition: background-image 0.5s
 
   .poem-wrapper
     padding: 0
