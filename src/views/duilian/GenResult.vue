@@ -3,7 +3,7 @@
                :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
   >
 <!--    loader-->
-    <v-layout row justify-center align-center v-show="!isReady | isLoadingBg">
+    <v-layout row justify-center align-center v-show="!isReady || isLoadingBg">
       <v-flex xs3>
         <single-loader></single-loader>
       </v-flex>
@@ -32,7 +32,7 @@
                         <v-flex xs4>
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
-                              <h5 v-for="(c, i) in myDuilians[duilianPtr].shanglain"
+                              <h5 v-for="(c, i) in safeShanglian"
                                   class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
@@ -42,7 +42,7 @@
                         <v-flex xs4>
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
-                              <h5 v-for="(c, i) in myDuilians[duilianPtr].xialian"
+                              <h5 v-for="(c, i) in safeXialian"
                                   class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
@@ -150,8 +150,26 @@ export default {
       isKeyword: state => state.duilian.isKeyword
     }),
     safeHengpi () {
-      return this.myDuilians[this.duilianPtr].hengpi.length === 0
-        ? '小牛雅颂' : this.myDuilians[this.duilianPtr].hengpi
+      if (this.myDuilians === null) {
+        return ''
+      } else {
+        return this.myDuilians[this.duilianPtr].hengpi.length === 0
+          ? '小牛雅颂' : this.myDuilians[this.duilianPtr].hengpi
+      }
+    },
+    safeShanglian () {
+      if (this.myDuilians === null) {
+        return ''
+      } else {
+        return this.myDuilians[this.duilianPtr].shanglain
+      }
+    },
+    safeXialian () {
+      if (this.myDuilians === null) {
+        return ''
+      } else {
+        return this.myDuilians[this.duilianPtr].xialian
+      }
     },
     bgImage () {
       return bgBasePath + this.bgImageID.toString() + '.jpg'

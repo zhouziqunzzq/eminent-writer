@@ -8,7 +8,7 @@
               <v-img src="~@/assets/guwen/bg-text-input.png" :contain="true">
                 <v-container fluid fill-height class="textarea-wrapper">
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs9>
+                    <v-flex xs9 fill-height>
                       <a
                         style="position: absolute; bottom: 6%; right: 8%;"
                         v-show="textInput != null && textInput.length > 0"

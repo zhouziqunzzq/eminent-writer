@@ -48,6 +48,10 @@ export default {
     timeoutStr: { // 超时提示语内容
       type: String,
       default: '（由于字体文件较大，若长时间未响应，请刷新重试）'
+    },
+    background: { // 是否隐藏界面进行后台加载
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -91,6 +95,7 @@ export default {
     }
   },
   created () {
+    this.show = !this.background
     this.fontSum = this.fontFamilies.length
     this.preloadFonts()
     setTimeout(() => {

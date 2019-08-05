@@ -26,18 +26,17 @@
     </v-container>
 
 <!--    font loader-->
-<!--    <font-loader-->
-<!--      :font-families="['STKaiti', 'STXingkai']"-->
-<!--      tip-str="(2/2) 字体预加载中..."-->
-<!--      progress-type="count"-->
-<!--      v-if="isLoadingFonts"-->
-<!--      @font-loaded="fontLoaded()"-->
-<!--    >-->
-<!--    </font-loader>-->
+    <font-loader
+      :font-families="['STKaiti', 'STXingkai']"
+      :background="true"
+    >
+    </font-loader>
 
 <!--    main content-->
     <v-content v-if="!isLoadingSplash && !isLoadingImg && !isSplashing">
-      <router-view></router-view>
+      <transition :name="transitionName">
+        <router-view></router-view>
+      </transition>
 
       <audio
         id="bgm" src="/audio/bgm.mp3"
@@ -77,12 +76,13 @@ import { HIDE_SNACKBAR } from '@/mutation-types'
 import { imgURLs } from '@/assets-description'
 import preLoadImage from 'vue-preload-image'
 import { preloadImage } from '@/helpers'
-// import fontLoader from '@/components/FontLoader.vue'
+import fontLoader from '@/components/FontLoader.vue'
 
 export default {
   name: 'App',
   components: {
-    preLoadImage
+    preLoadImage,
+    fontLoader
   },
   data () {
     return {
@@ -93,7 +93,8 @@ export default {
       endLoading: null,
       // isLoadingFonts: false,
       isSplashing: false,
-      isPlaying: false
+      isPlaying: false,
+      transitionName: 'slide-left'
     }
   },
   computed: {
@@ -101,6 +102,21 @@ export default {
       'snackbar',
       'app'
     ])
+  },
+  watch: {
+    '$route' (to, from) {
+      const toPath = to.path.split('/')
+      const fromPath = from.path.split('/')
+      const toDepth = toPath.length
+      const fromDepth = fromPath.length
+      const toLast = toPath[toPath.length - 1]
+      const fromLast = fromPath[fromPath.length - 1]
+      if (toDepth === fromDepth) {
+        this.transitionName = fromLast === 'home' && toLast === 'result' ? 'slide-left' : 'slide-right'
+      } else {
+        this.transitionName = toDepth < fromDepth ? 'slide-right' : 'slide-left'
+      }
+    }
   },
   methods: {
     ...mapActions([
@@ -180,4 +196,24 @@ export default {
   @keyframes rotateRound
     from {transform: rotate(0deg) }
     to {transform: rotate(360deg) }
+
+  .slide-right-enter-active, .slide-right-leave-active
+    transition: transform .5s !important
+    position: absolute
+    top: 0
+    left: 0
+  .slide-right-enter
+    transform: translateX(-100%)
+  .slide-right-leave-to
+    transform: translateX(100%)
+
+  .slide-left-enter-active, .slide-left-leave-active
+    transition: transform .5s !important
+    position: absolute
+    top: 0
+    left: 0
+  .slide-left-enter
+    transform: translateX(100%)
+  .slide-left-leave-to
+    transform: translateX(-100%)
 </style>
