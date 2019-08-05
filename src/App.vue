@@ -16,7 +16,7 @@
     </pre-load-image>
 
 <!--    splash animation-->
-    <v-container fluid fill-height pa-0 v-show="isSplashing">
+    <v-container fluid fill-height pa-0 v-if="isSplashing">
       <v-layout column justify-center align-center>
         <v-img src="~@/assets/logo-loader.gif"
                :contain="true"
@@ -26,11 +26,12 @@
     </v-container>
 
 <!--    font loader-->
-    <font-loader
-      :font-families="['STKaiti', 'STXingkai']"
-      :background="true"
-    >
-    </font-loader>
+  <font-loader
+    v-if="!isLoadingSplash && !isLoadingImg"
+    :font-families="['STKaiti', 'STXingkai']"
+    :background="true"
+  >
+  </font-loader>
 
 <!--    main content-->
     <v-content v-if="!isLoadingSplash && !isLoadingImg && !isSplashing">
