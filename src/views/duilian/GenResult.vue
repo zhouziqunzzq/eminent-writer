@@ -3,7 +3,9 @@
                :style="{ backgroundImage: 'url(' + bgImageInUse + ')'}"
   >
 <!--    loader-->
-    <v-layout row justify-center align-center v-show="!isReady || isLoadingBg">
+    <v-layout row justify-center align-center v-show="!isReady || isLoadingBg"
+              class="my-loader"
+    >
       <v-flex xs3>
         <single-loader></single-loader>
       </v-flex>
