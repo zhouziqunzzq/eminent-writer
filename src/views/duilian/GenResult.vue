@@ -17,7 +17,7 @@
                   <v-flex xs3>
                     <v-container fluid fill-height pa-0 pt-4>
                       <v-layout row justify-center align-center reverse>
-                        <h5 v-for="(c, i) in hengpi"
+                        <h5 v-for="(c, i) in safeHengpi"
                             class="duilian-text kaiti" :key="i">
                           {{c}}
                         </h5>
@@ -25,12 +25,12 @@
                     </v-container>
                   </v-flex>
                   <v-flex xs9>
-                    <v-container fluid fill-height pa-0 pl-4 pr-4 pb-4>
+                    <v-container fluid fill-height pa-0 pl-1 pr-1 pb-4>
                       <v-layout row justify-space-between align-center reverse>
                         <v-flex xs4>
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
-                              <h5 v-for="(c, i) in shanglian"
+                              <h5 v-for="(c, i) in myDuilians[duilianPtr].shanglain"
                                   class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
@@ -40,7 +40,7 @@
                         <v-flex xs4>
                           <v-container fluid fill-height pa-0>
                             <v-layout column justify-center align-center>
-                              <h5 v-for="(c, i) in xialian"
+                              <h5 v-for="(c, i) in myDuilians[duilianPtr].xialian"
                                   class="duilian-text kaiti" :key="i">
                                 {{c}}
                               </h5>
@@ -79,7 +79,7 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      @click="$router.go(-1)"
+                      @click="duilianPtr = (duilianPtr + 1) % duilianCnt"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -125,6 +125,9 @@ export default {
       hengpi: '小牛雅颂',
       shanglian: '旧岁又添几个喜',
       xialian: '新年更上一层楼',
+      myDuilians: null,
+      duilianCnt: 0,
+      duilianPtr: 0,
       isReady: false,
       showButton: true
     }
@@ -135,7 +138,11 @@ export default {
       textInput: state => state.duilian.textInput,
       photoFile: state => state.duilian.photoFile,
       isKeyword: state => state.duilian.isKeyword
-    })
+    }),
+    safeHengpi () {
+      return this.myDuilians[this.duilianPtr].hengpi.length === 0
+        ? '小牛雅颂' : this.myDuilians[this.duilianPtr].hengpi
+    }
   },
   methods: {
     ...mapActions([
@@ -172,34 +179,32 @@ export default {
           input: this.textInput
         })
         if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.shanglian = response.parsedBody.data.shanglian
-          this.xialian = response.parsedBody.data.xialian
-          this.hengpi = '小牛雅颂'
-          this.isReady = true
+          this.myDuilians = response.parsedBody.data
+          this.duilianCnt = this.myDuilians.length
+          this.duilianPtr = 0
         } else {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     } else if (this.genMethod === 'photo') {
       try {
         const response = await postForm(duilianPictureURL, {
           'photo': this.photoFile
         })
         if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.shanglian = response.parsedBody.data.shanglian
-          this.xialian = response.parsedBody.data.xialian
-          this.hengpi = '小牛雅颂'
-          this.isReady = true
+          this.myDuilians = response.parsedBody.data
+          this.duilianCnt = this.myDuilians.length
+          this.duilianPtr = 0
         } else {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     }
   }
 }

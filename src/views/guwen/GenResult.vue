@@ -92,9 +92,7 @@ export default {
   },
   data () {
     return {
-      transResult: '庆历四年春，滕子京谪守巴陵郡。' +
-        '越明年，政通人和，百废具兴。' +
-        '乃重修岳阳楼，增其旧制，刻唐贤今人诗赋于其上。属予作文以记之。',
+      transResult: '',
       isReady: false,
       showButton: true
     }
@@ -153,32 +151,28 @@ export default {
           input: this.textInput,
           type: this.direction
         })
-        if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.transResult = response.parsedBody.data
-          this.isReady = true
-        } else {
+        this.transResult = response.parsedBody.data
+        if (!response.parsedBody.result) {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     } else if (this.genMethod === 'photo') {
       try {
         const response = await postForm(guwenPictureURL, {
           'photo': this.photoFile,
           'type': String(this.direction)
         })
-        if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.transResult = response.parsedBody.data
-          this.isReady = true
-        } else {
+        this.transResult = response.parsedBody.data
+        if (!response.parsedBody.result) {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     }
   }
 }

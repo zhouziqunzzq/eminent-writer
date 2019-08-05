@@ -84,7 +84,7 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { isChineseAndPunc } from '@/helpers'
+// import { isChineseAndPunc } from '@/helpers'
 import {
   GUWEN_SET_GEN_METHOD, GUWEN_SET_TEXT_INPUT,
   GUWEN_SET_PHOTO_FILE, GUWEN_SET_DIRECTION
@@ -129,10 +129,6 @@ export default {
     onTextGoClick () {
       if (this.textInput.length === 0) {
         this.showError('请输入待翻译的文章')
-        return
-      }
-      if (!isChineseAndPunc(this.textInput)) {
-        this.showError('文章只能包含中文和中文标点')
         return
       }
       this.$store.commit(GUWEN_SET_GEN_METHOD, 'text')

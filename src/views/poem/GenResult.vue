@@ -19,7 +19,7 @@
                   <v-layout row justify-center align-center>
                     <v-flex
                       xs1
-                      v-for="(v, i) in myPoem"
+                      v-for="(v, i) in myPoems[poemPtr]"
                       :key="i"
                       style="margin: 0 0.8rem"
                     >
@@ -64,7 +64,7 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      @click="$router.go(-1)"
+                      @click="poemPtr = (poemPtr + 1) % poemCnt"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -120,12 +120,14 @@ export default {
   },
   data () {
     return {
-      myPoem: [
+      myPoems: [
         '千山鸟飞绝',
         '万径人踪灭',
         '孤舟蓑笠翁',
         '独钓寒江雪'
       ],
+      poemCnt: 0,
+      poemPtr: 0,
       isReady: false,
       showButton: true,
       showBgPicker: false,
@@ -180,15 +182,16 @@ export default {
           type: Number(this.numberOfWords)
         })
         if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.myPoem = response.parsedBody.data
-          this.isReady = true
+          this.myPoems = response.parsedBody.data
+          this.poemCnt = this.myPoems.length
+          this.poemPtr = 0
         } else {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     } else if (this.genMethod === 'photo') {
       try {
         const response = await postForm(poemPictureURL, {
@@ -196,15 +199,16 @@ export default {
           'type': String(this.numberOfWords)
         })
         if (response.parsedBody.result) {
-          // this.showInfo(response.parsedBody.msg)
-          this.myPoem = response.parsedBody.data
-          this.isReady = true
+          this.myPoems = response.parsedBody.data
+          this.poemCnt = this.myPoems.length
+          this.poemPtr = 0
         } else {
           this.showError(response.parsedBody.msg)
         }
       } catch (e) {
         this.showError(e)
       }
+      this.isReady = true
     }
   }
 }
