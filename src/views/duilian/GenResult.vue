@@ -16,26 +16,31 @@
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-start align-center>
             <v-flex xs6 style="width: 80%">
-              <transition name="fade">
-                <v-container fluid fill-height class="duilian-wrapper"
-                             v-show="isReady"
-                >
+              <v-container fluid fill-height class="duilian-wrapper">
                 <v-layout column justify-center>
                   <v-flex xs3>
                     <v-container fluid fill-height pa-0 pt-4>
-                      <v-layout row justify-center align-center reverse>
-                        <h5 v-for="(c, i) in safeHengpi"
-                            class="duilian-text kaiti" :key="i">
-                          {{c}}
-                        </h5>
+                      <v-layout row justify-center align-center reverse
+                                v-show="showPlaceholder"
+                      >
+                        <h5 class="duilian-text kaiti" style="opacity: 0">占位符</h5>
                       </v-layout>
-                    </v-container>
+                      <transition name="fade">
+                        <v-layout row justify-center align-center reverse v-show="showHengpi">
+                          <h5 v-for="(c, i) in safeHengpi"
+                              class="duilian-text kaiti" :key="i">
+                            {{c}}
+                          </h5>
+                        </v-layout>
+                      </transition>
+                  </v-container>
                   </v-flex>
                   <v-flex xs9>
                     <v-container fluid fill-height pa-0 pl-1 pr-1 pb-4>
                       <v-layout row justify-space-between align-center reverse>
                         <v-flex xs4>
-                          <v-container fluid fill-height pa-0>
+                          <transition name="fade">
+                            <v-container fluid fill-height pa-0 v-show="showShanglian">
                             <v-layout column justify-center align-center>
                               <h5 v-for="(c, i) in safeShanglian"
                                   class="duilian-text kaiti" :key="i">
@@ -43,9 +48,11 @@
                               </h5>
                             </v-layout>
                           </v-container>
+                          </transition>
                         </v-flex>
                         <v-flex xs4>
-                          <v-container fluid fill-height pa-0>
+                          <transition name="fade">
+                            <v-container fluid fill-height pa-0 v-show="showXialian">
                             <v-layout column justify-center align-center>
                               <h5 v-for="(c, i) in safeXialian"
                                   class="duilian-text kaiti" :key="i">
@@ -53,13 +60,13 @@
                               </h5>
                             </v-layout>
                           </v-container>
+                          </transition>
                         </v-flex>
                       </v-layout>
                     </v-container>
                   </v-flex>
                 </v-layout>
               </v-container>
-              </transition>
             </v-flex>
           </v-layout>
         </v-container>
@@ -87,13 +94,15 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      @click="duilianPtr = (duilianPtr + 1) % duilianCnt"
+                      @click="onReGenerate()"
+                      :disable="isAnimating"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="更换背景"
                       @click="onChangeBg()"
+                      :disable="isLoadingBg"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -120,7 +129,7 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { postForm, postJson, preloadImage } from '@/helpers'
+import { postForm, postJson, preloadImage, sleep } from '@/helpers'
 import { duilianDuiURL, duilianKeyURL, duilianPictureURL,
   bgBasePath, bgCount } from '@/config'
 import singleLoader from '@/components/SingleLoader'
@@ -142,10 +151,18 @@ export default {
       duilianPtr: 0,
       isReady: false,
       showButton: true,
+      // background picker
       bgImageID: 11,
       bgCount: bgCount,
       bgImageInUse: bgBasePath + '11.jpg',
-      isLoadingBg: false
+      isLoadingBg: false,
+      // animation
+      showShanglian: false,
+      showXialian: false,
+      showHengpi: false,
+      showPlaceholder: true,
+      animationSpeed: 1000,
+      isAnimating: false
     }
   },
   computed: {
@@ -222,6 +239,34 @@ export default {
           console.log(e)
         })
       this.isLoadingBg = false
+    },
+    hideAll () {
+      this.showShanglian = false
+      this.showXialian = false
+      this.showHengpi = false
+    },
+    async startAnimation () {
+      this.isAnimating = true
+      this.showShanglian = true
+      await sleep(this.animationSpeed)
+      this.showXialian = true
+      await sleep(this.animationSpeed)
+      this.showPlaceholder = false
+      this.showHengpi = true
+      await sleep(this.animationSpeed)
+      this.isAnimating = false
+    },
+    async onReGenerate () {
+      if (this.isAnimating) {
+        return null
+      } else {
+        this.isAnimating = true
+        this.hideAll()
+        await sleep(this.animationSpeed)
+        this.showPlaceholder = true
+        this.duilianPtr = (this.duilianPtr + 1) % this.duilianCnt
+        this.startAnimation()
+      }
     }
   },
   async mounted () {
@@ -235,6 +280,7 @@ export default {
           this.myDuilians = response.parsedBody.data
           this.duilianCnt = this.myDuilians.length
           this.duilianPtr = 0
+          this.startAnimation()
         } else {
           this.showError(response.parsedBody.msg)
         }
@@ -251,6 +297,7 @@ export default {
           this.myDuilians = response.parsedBody.data
           this.duilianCnt = this.myDuilians.length
           this.duilianPtr = 0
+          this.startAnimation()
         } else {
           this.showError(response.parsedBody.msg)
         }

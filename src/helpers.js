@@ -77,3 +77,11 @@ export const preloadImage = (url) => {
     i.src = url
   })
 }
+
+export const sleep = (t) => {
+  return new Promise(resolve => {
+    setTimeout(() => {
+      resolve()
+    }, t)
+  })
+}

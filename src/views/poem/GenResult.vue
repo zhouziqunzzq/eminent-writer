@@ -17,32 +17,31 @@
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-center align-center>
             <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
-              <transition name="fade">
-                <v-container fluid fill-height class="poem-wrapper"
-                             v-show="isReady"
+              <v-container fluid fill-height class="poem-wrapper">
+                <transition-group
+                  name="fade" tag="div"
+                  class="layout row justify-center align-center"
                 >
-                  <v-layout row justify-center align-center>
-                    <v-flex
-                      xs1
-                      v-for="(v, i) in myPoems[poemPtr]"
-                      :key="i"
-                      style="margin: 0 0.8rem"
-                    >
-                      <v-container fluid fill-height pa-0>
-                        <v-layout column justify-center>
-                          <v-flex
-                            xs1
-                            v-for="(c, ii) in v"
-                            :key="ii"
-                          >
-                            <h5 class="poem-text text-xs-center kaiti">{{c}}</h5>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </transition>
+                  <v-flex
+                    xs1
+                    v-for="(v, i) in animatedPoem"
+                    :key="i"
+                    style="margin: 0 0.8rem"
+                  >
+                    <v-container fluid fill-height pa-0>
+                      <v-layout column justify-center>
+                        <v-flex
+                          xs1
+                          v-for="(c, ii) in v"
+                          :key="ii"
+                        >
+                          <h5 class="poem-text text-xs-center kaiti">{{c}}</h5>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
+                  </v-flex>
+                </transition-group>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
@@ -70,13 +69,15 @@
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="重新生成"
-                      @click="poemPtr = (poemPtr + 1) % poemCnt"
+                      @click="onReGenerate()"
+                      :disable="isAnimating"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
                     <ink-button
                       tag="更换背景"
                       @click="onChangeBg()"
+                      :disable="isLoadingBg"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -103,7 +104,7 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { postForm, postJson, preloadImage } from '@/helpers'
+import { postForm, postJson, preloadImage, sleep } from '@/helpers'
 import { poemKeyURL, poemAcrosticURL,
   poemPictureURL, bgBasePath, bgCount } from '@/config'
 import singleLoader from '@/components/SingleLoader'
@@ -120,21 +121,20 @@ export default {
   },
   data () {
     return {
-      myPoems: [
-        '千山鸟飞绝',
-        '万径人踪灭',
-        '孤舟蓑笠翁',
-        '独钓寒江雪'
-      ],
+      myPoems: [[]],
       poemCnt: 0,
       poemPtr: 0,
       isReady: false,
       showButton: true,
-      showBgPicker: false,
+      // background picker
       bgImageID: 10,
       bgCount: bgCount,
       bgImageInUse: bgBasePath + '10.jpg',
-      isLoadingBg: false
+      isLoadingBg: false,
+      // animation
+      animatedPoem: [],
+      animationSpeed: 1000,
+      isAnimating: false
     }
   },
   computed: {
@@ -190,6 +190,31 @@ export default {
           console.log(e)
         })
       this.isLoadingBg = false
+    },
+    async startAnimation () {
+      this.isAnimating = true
+      const target = this.myPoems[this.poemPtr]
+      for (const line of target) {
+        this.animatedPoem.push(line)
+        await sleep(this.animationSpeed)
+      }
+      this.isAnimating = false
+    },
+    clearAnimation () {
+      while (this.animatedPoem.length > 0) {
+        this.animatedPoem.pop()
+      }
+    },
+    async onReGenerate () {
+      if (this.isAnimating) {
+        return null
+      } else {
+        this.isAnimating = true
+        this.clearAnimation()
+        await sleep(this.animationSpeed)
+        this.poemPtr = (this.poemPtr + 1) % this.poemCnt
+        this.startAnimation()
+      }
     }
   },
   async mounted () {
@@ -204,6 +229,7 @@ export default {
           this.myPoems = response.parsedBody.data
           this.poemCnt = this.myPoems.length
           this.poemPtr = 0
+          this.startAnimation()
         } else {
           this.showError(response.parsedBody.msg)
         }
@@ -221,6 +247,7 @@ export default {
           this.myPoems = response.parsedBody.data
           this.poemCnt = this.myPoems.length
           this.poemPtr = 0
+          this.startAnimation()
         } else {
           this.showError(response.parsedBody.msg)
         }
@@ -256,11 +283,13 @@ export default {
     font-weight: normal
 
   .fade-enter-active, .fade-leave-active
-    transition: opacity 1s !important
+    transition: opacity 1s
   .fade-enter
     opacity: 0
   .fade-enter-to
     opacity: 1
   .fade-leave-to
     opacity: 0
+  .fade-move
+    transition: transform 1s
 </style>
