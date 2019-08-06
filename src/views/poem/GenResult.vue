@@ -17,7 +17,10 @@
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-center align-center>
             <v-flex :class="{ 'xs4': numberOfWords === 5, 'xs6': numberOfWords === 7 }">
-                <v-container fluid fill-height class="poem-wrapper">
+              <transition name="fade">
+                <v-container fluid fill-height class="poem-wrapper"
+                             v-show="isReady"
+                >
                   <v-layout row justify-center align-center>
                     <v-flex
                       xs1
@@ -39,6 +42,7 @@
                     </v-flex>
                   </v-layout>
                 </v-container>
+              </transition>
             </v-flex>
           </v-layout>
         </v-container>
@@ -248,6 +252,15 @@ export default {
     //background-color: rgba(255, 255, 255, 0.6)
 
   .poem-text
-    font-size: 1.2rem
+    font-size: 1.4rem
     font-weight: normal
+
+  .fade-enter-active, .fade-leave-active
+    transition: opacity 1s !important
+  .fade-enter
+    opacity: 0
+  .fade-enter-to
+    opacity: 1
+  .fade-leave-to
+    opacity: 0
 </style>

@@ -6,6 +6,7 @@ export const imgURLs = [
   require('@/assets/music.png'),
   // common
   require('@/assets/common/button-ink.png'),
+  require('@/assets/common/button-ink-disabled.png'),
   require('@/assets/common/niutrans_logo.png'),
   require('@/assets/common/stamp-big.png'),
   require('@/assets/common/stamp-small.png'),

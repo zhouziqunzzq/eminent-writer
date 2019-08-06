@@ -16,7 +16,10 @@
         <v-container fluid fill-height style="padding: 10% 15%">
           <v-layout column justify-start align-center>
             <v-flex xs6 style="width: 80%">
-              <v-container fluid fill-height class="duilian-wrapper">
+              <transition name="fade">
+                <v-container fluid fill-height class="duilian-wrapper"
+                             v-show="isReady"
+                >
                 <v-layout column justify-center>
                   <v-flex xs3>
                     <v-container fluid fill-height pa-0 pt-4>
@@ -56,6 +59,7 @@
                   </v-flex>
                 </v-layout>
               </v-container>
+              </transition>
             </v-flex>
           </v-layout>
         </v-container>
@@ -280,4 +284,13 @@ export default {
   .duilian-text
     font-size: 1.4rem
     font-weight: normal
+
+  .fade-enter-active, .fade-leave-active
+    transition: opacity 1s !important
+  .fade-enter
+    opacity: 0
+  .fade-enter-to
+    opacity: 1
+  .fade-leave-to
+    opacity: 0
 </style>

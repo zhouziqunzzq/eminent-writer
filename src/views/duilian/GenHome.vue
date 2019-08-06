@@ -88,6 +88,7 @@
                     <ink-button
                       tag="拍照"
                       @click="$refs.photo_file.click()"
+                      :disable="disablePhoto"
                     ></ink-button>
                   </v-flex>
                   <v-flex xs4 pa-2 style="width: 75%">
@@ -134,6 +135,9 @@ export default {
       } else {
         return '输入关键词（2-4个字）'
       }
+    },
+    disablePhoto () {
+      return this.isShanglian
     }
   },
   watch: {

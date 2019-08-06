@@ -1,6 +1,8 @@
 <template>
-  <a @click="$emit('click')">
-    <v-img src="~@/assets/common/button-ink.png" :contain="true" :width="width">
+  <a @click="disable ? '' : $emit('click')">
+    <v-img :src="buttonImage"
+           :contain="true" :width="width"
+    >
       <v-container fluid fill-height pa-0>
         <v-layout row justify-center align-center>
           <v-flex xs12>
@@ -42,6 +44,10 @@ export default {
     paddingRight: {
       type: String,
       default: '16%'
+    },
+    disable: {
+      type: Boolean,
+      default: false
     }
   },
   data () {
@@ -57,6 +63,11 @@ export default {
         fontWeight: this.fontWeight,
         paddingRight: this.paddingRight
       }
+    },
+    buttonImage () {
+      return this.disable
+        ? require('@/assets/common/button-ink-disabled.png')
+        : require('@/assets/common/button-ink.png')
     }
   }
 }
