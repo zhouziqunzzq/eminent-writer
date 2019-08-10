@@ -1,0 +1,12 @@
+$percent=0%
+animation-zoom(n)
+  @keyframes zoom-{n} {
+    0% {transform: scale(1)}
+    {1% * (50/(n+1))} {transform: scale(1.1)}
+    {1% * (100/(n+1))} {transform: scale(1)}
+    100% {transform: scale(1)}
+  }
+  .animation-zoom-{n}
+    animation-name: zoom- + n
+    animation-duration: 1s * (n+1)
+    animation-iteration-count: infinite
