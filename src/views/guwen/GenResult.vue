@@ -49,22 +49,25 @@
             <v-flex xs4 fill-height v-show="showButton">
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-end align-end>
-                  <v-flex xs2 pa-2 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 85%">
                     <ink-button
                       tag="复制"
                       @click="doCopy()"
+                      animation-number="3" animation-delay="0s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-2 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 85%">
                     <ink-button
                       tag="分享"
                       @click="share()"
+                      animation-number="3" animation-delay="1s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-2 style="width: 75%">
+                  <v-flex xs2 pa-2 style="width: 85%">
                     <ink-button
                       tag="返回"
                       @click="$router.push('/guwen/home')"
+                      animation-number="3" animation-delay="2s"
                     ></ink-button>
                   </v-flex>
                 </v-layout>

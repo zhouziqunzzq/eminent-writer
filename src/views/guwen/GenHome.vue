@@ -48,28 +48,32 @@
             <v-flex xs4 fill-height>
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-end align-end>
-                  <v-flex xs2 pa-1 style="width: 75%">
+                  <v-flex xs2 pa-1 style="width: 78%">
                     <ink-button
                       :tag="buttonHint"
                       @click="direction = (direction === 1 ? 2 : 1)"
+                      animation-number="4" animation-delay="0s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-1 style="width: 75%">
+                  <v-flex xs2 pa-1 style="width: 78%">
                     <ink-button
                       tag="翻译"
                       @click="onTextGoClick()"
+                      animation-number="4" animation-delay="1s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-1 style="width: 75%">
+                  <v-flex xs2 pa-1 style="width: 78%">
                     <ink-button
                       tag="拍照"
                       @click="$refs.photo_file.click()"
+                      animation-number="4" animation-delay="2s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs2 pa-1 style="width: 75%">
+                  <v-flex xs2 pa-1 style="width: 78%">
                     <ink-button
                       tag="返回"
                       @click="$router.push('/')"
+                      animation-number="4" animation-delay="3s"
                     ></ink-button>
                   </v-flex>
                 </v-layout>

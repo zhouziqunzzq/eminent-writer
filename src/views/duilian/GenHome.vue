@@ -78,23 +78,26 @@
             <v-flex xs4>
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center align-end>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="生成"
                       @click="onTextGoClick()"
+                      animation-number="3" animation-delay="0s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="拍照"
                       @click="$refs.photo_file.click()"
                       :disable="disablePhoto"
+                      animation-number="3" animation-delay="1s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="返回"
                       @click="$router.push('/')"
+                      animation-number="3" animation-delay="2s"
                     ></ink-button>
                   </v-flex>
                 </v-layout>

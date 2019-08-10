@@ -91,30 +91,34 @@
             <v-flex xs4 v-show="showButton">
               <v-container fluid fill-height pa-0>
                 <v-layout column justify-center align-end>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="重新生成"
                       @click="onReGenerate()"
                       :disable="isAnimating"
+                      animation-number="4" animation-delay="0s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="更换背景"
                       @click="onChangeBg()"
                       :disable="isLoadingBg"
+                      animation-number="4" animation-delay="1s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="分享"
                       @click="share()"
+                      animation-number="4" animation-delay="2s"
                     ></ink-button>
                   </v-flex>
-                  <v-flex xs4 pa-2 style="width: 75%">
+                  <v-flex xs4 pa-2 style="width: 85%">
                     <ink-button
                       tag="返回"
                       @click="$router.push('/duilian/home')"
+                      animation-number="4" animation-delay="3s"
                     ></ink-button>
                   </v-flex>
                 </v-layout>
