@@ -25,7 +25,7 @@
                   <v-flex
                     xs1
                     v-for="(v, i) in animatedPoem"
-                    :key="i"
+                    :key="v + i.toString()"
                     style="margin: 0 0.8rem"
                   >
                     <v-container fluid fill-height pa-0>
@@ -33,7 +33,7 @@
                         <v-flex
                           xs1
                           v-for="(c, ii) in v"
-                          :key="ii"
+                          :key="c + ii.toString()"
                         >
                           <h5 class="poem-text text-xs-center kaiti">{{c}}</h5>
                         </v-flex>
