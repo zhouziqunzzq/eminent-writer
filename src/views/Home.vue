@@ -123,6 +123,7 @@ export default {
   }
 
   $birds-move-time = 10s
+  $birds-float-time = 8s
   $birds-delay = 0.2s
   $birds-flap-time = 2s
   .birds-animator-1
@@ -130,23 +131,35 @@ export default {
     top: 30%
     right: 0
     z-index: 0
-    transform: rotate3d(1, 0, 0, 0deg)
     animation: birds-flap $birds-flap-time infinite ease-in-out forwards,\
-      birds-h $birds-move-time infinite linear forwards
+      birds-h $birds-move-time infinite linear forwards,\
+      birds-v-1 $birds-float-time infinite ease-in-out forwards
 
   .birds-animator-2
     position: absolute
     top: 32%
     right: 0
     z-index: 0
-    transform: rotate3d(1, 0, 0, 0deg)
     animation: birds-flap $birds-flap-time infinite ease-in-out forwards,\
-      birds-h $birds-move-time $birds-delay infinite linear forwards
+      birds-h $birds-move-time $birds-delay infinite linear forwards,\
+      birds-v-2 $birds-float-time infinite ease-in-out forwards
 
   @keyframes birds-h {
     0% { right: -10% }
     87.5% { right: 100% }
     100% { right: 100% }
+  }
+
+  @keyframes birds-v-1 {
+    0% { top: 33% }
+    50% { top: 30% }
+    100% { top: 33% }
+  }
+
+  @keyframes birds-v-2 {
+    0% { top: 35% }
+    50% { top: 32% }
+    100% { top: 35% }
   }
 
   @keyframes birds-flap {
