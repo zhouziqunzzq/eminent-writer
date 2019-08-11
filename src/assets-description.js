@@ -19,7 +19,7 @@ export const imgURLs = [
   // home
   require('@/assets/home/bg.jpg'),
   require('@/assets/home/bg-clean.jpg'),
-  require('@/assets/home/boat.gif'),
+  require('@/assets/home/boat.png'),
   // poem
   require('@/assets/poem/bg.jpg'),
   bgBasePath + '10.jpg'

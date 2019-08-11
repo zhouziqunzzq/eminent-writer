@@ -35,9 +35,8 @@
           </v-layout>
         </v-container>
       </v-flex>
-      <img src="~@/assets/home/boat.gif"
-             width="60%" class="boat-animator"
-             ref="boatAnimator"
+      <img src="~@/assets/home/boat.png"
+             width="20%" class="boat-animator"
       />
     </v-layout>
   </v-container>
@@ -63,8 +62,6 @@ export default {
   },
   mounted () {
     this.$store.commit(RESET_HISTORY)
-    // const url = this.$refs.boatAnimator.src
-    // this.$refs.boatAnimator.src = ''
   }
 }
 </script>
@@ -82,9 +79,40 @@ export default {
   .float
     transform: translateY(-6em)
 
+  $boat-animation-time = 20s
   .boat-animator
     position: absolute
-    bottom: 20%
-    right: 40%
+    bottom: 40%
+    left: 20%
     z-index: 0
+    animation: boat-h $boat-animation-time infinite cubic-bezier(.2,.08,.5,-0.01) forwards,\
+      boat-v $boat-animation-time infinite ease-out forwards,\
+      boat-zoom $boat-animation-time infinite forwards,\
+      boat-fade-in $boat-animation-time infinite forwards
+
+  @keyframes boat-h {
+    0% { left: 20% }
+    87.5% { left: 100% }
+    100% { left: 100% }
+  }
+
+  @keyframes boat-v {
+    0% { bottom: 40% }
+    43.75% { bottom: 25% }
+    58.3% { bottom: 23% }
+    87.5% { bottom: 22% }
+    100% { bottom: 22% }
+  }
+
+  @keyframes boat-zoom {
+    0% { transform: scale(0.8) }
+    87.5% { transform: scale(1.0) }
+    100% { transform: scale(1.0) }
+  }
+
+  @keyframes boat-fade-in {
+    0% { opacity: 0 }
+    50% { opacity: 1 }
+    100% { opacity: 1 }
+  }
 </style>
