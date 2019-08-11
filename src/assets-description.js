@@ -18,8 +18,9 @@ export const imgURLs = [
   require('@/assets/guwen/bg-text-input.png'),
   // home
   require('@/assets/home/bg.jpg'),
-  require('@/assets/home/bg-clean.jpg'),
   require('@/assets/home/boat.png'),
+  require('@/assets/home/bird1.png'),
+  require('@/assets/home/bird2.png'),
   // poem
   require('@/assets/poem/bg.jpg'),
   bgBasePath + '10.jpg'

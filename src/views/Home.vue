@@ -35,6 +35,12 @@
           </v-layout>
         </v-container>
       </v-flex>
+      <img src="~@/assets/home/bird1.png"
+           width="3%" class="birds-animator-1"
+      />
+      <img src="~@/assets/home/bird2.png"
+           width="3%" class="birds-animator-2"
+      />
       <img src="~@/assets/home/boat.png"
              width="20%" class="boat-animator"
       />
@@ -68,7 +74,7 @@ export default {
 
 <style lang="stylus" scoped>
   #wrapper
-    background-image: url("~@/assets/home/bg-clean.jpg")
+    background-image: url("~@/assets/home/bg.jpg")
     background-repeat: no-repeat
     background-size: 100% 100%
     padding: 1rem
@@ -114,5 +120,38 @@ export default {
     0% { opacity: 0 }
     50% { opacity: 1 }
     100% { opacity: 1 }
+  }
+
+  $birds-move-time = 10s
+  $birds-delay = 0.2s
+  $birds-flap-time = 2s
+  .birds-animator-1
+    position: absolute
+    top: 30%
+    right: 0
+    z-index: 0
+    transform: rotate3d(1, 0, 0, 0deg)
+    animation: birds-flap $birds-flap-time infinite ease-in-out forwards,\
+      birds-h $birds-move-time infinite linear forwards
+
+  .birds-animator-2
+    position: absolute
+    top: 32%
+    right: 0
+    z-index: 0
+    transform: rotate3d(1, 0, 0, 0deg)
+    animation: birds-flap $birds-flap-time infinite ease-in-out forwards,\
+      birds-h $birds-move-time $birds-delay infinite linear forwards
+
+  @keyframes birds-h {
+    0% { right: -10% }
+    87.5% { right: 100% }
+    100% { right: 100% }
+  }
+
+  @keyframes birds-flap {
+    0% { transform: rotate3d(1, 0, 0, 0deg) }
+    50% { transform: rotate3d(1, 0, 0, 50deg) }
+    100% { transform: rotate3d(1, 0, 0, 0deg) }
   }
 </style>
