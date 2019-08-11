@@ -88,10 +88,10 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-// import { isChineseAndPunc } from '@/helpers'
+import { postForm } from '@/helpers'
+import { guwenPictureURL } from '@/config'
 import {
-  GUWEN_SET_GEN_METHOD, GUWEN_SET_TEXT_INPUT,
-  GUWEN_SET_PHOTO_FILE, GUWEN_SET_DIRECTION
+  GUWEN_SET_TEXT_INPUT, GUWEN_SET_DIRECTION
 } from '@/mutation-types'
 
 export default {
@@ -135,20 +135,31 @@ export default {
         this.showError('请输入待翻译的文章')
         return
       }
-      this.$store.commit(GUWEN_SET_GEN_METHOD, 'text')
       this.$store.commit(GUWEN_SET_TEXT_INPUT, this.textInput)
       this.saveCommonSettings()
       this.$router.push('/guwen/result')
     },
-    onFileChange (e) {
+    async onFileChange (e) {
       if (e.target.files.length !== 1) {
         return false
       }
       const file = e.target.files[0]
-      this.$store.commit(GUWEN_SET_GEN_METHOD, 'photo')
-      this.$store.commit(GUWEN_SET_PHOTO_FILE, file)
-      this.saveCommonSettings()
-      this.$router.push('/guwen/result')
+      this.textInput = '正在识别，请稍等...'
+      try {
+        const response = await postForm(guwenPictureURL, {
+          'photo': file,
+          'type': '1'
+        })
+        if (!response.parsedBody.result) {
+          this.textInput = ''
+          this.showError(response.parsedBody.msg)
+        } else {
+          this.textInput = response.parsedBody.data
+        }
+      } catch (e) {
+        this.textInput = ''
+        this.showError(e)
+      }
     }
   },
   mounted () {

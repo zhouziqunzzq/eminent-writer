@@ -42,7 +42,6 @@ export default new Vuex.Store({
     guwen: {
       textInput: '',
       photoFile: null,
-      genMethod: 'text',
       direction: 2 // 1:classic -> modern; 2: modern -> classic
     },
     snackbar: {

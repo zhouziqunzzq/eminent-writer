@@ -83,8 +83,8 @@
 
 <script lang="js">
 import { mapState, mapActions } from 'vuex'
-import { postForm, postJson } from '@/helpers'
-import { guwenTextURL, guwenPictureURL } from '@/config'
+import { postJson } from '@/helpers'
+import { guwenTextURL } from '@/config'
 import singleLoader from '@/components/SingleLoader'
 import html2canvas from 'html2canvas'
 
@@ -102,7 +102,6 @@ export default {
   },
   computed: {
     ...mapState({
-      genMethod: state => state.guwen.genMethod,
       textInput: state => state.guwen.textInput,
       photoFile: state => state.guwen.photoFile,
       direction: state => state.guwen.direction
@@ -142,41 +141,25 @@ export default {
             document.body.appendChild(link)
             link.click()
             link.remove()
-            this.showInfo('已将生成结果保存为图片，请您下载后随意分享吧～')
+            this.showInfo('已将翻译结果保存为图片，请您下载后随意分享吧～')
           })
       }, 100)
     }
   },
   async mounted () {
-    if (this.genMethod === 'text') {
-      try {
-        const response = await postJson(guwenTextURL, {
-          input: this.textInput,
-          type: this.direction.toString()
-        })
-        this.transResult = response.parsedBody.data
-        if (!response.parsedBody.result) {
-          this.showError(response.parsedBody.msg)
-        }
-      } catch (e) {
-        this.showError(e)
+    try {
+      const response = await postJson(guwenTextURL, {
+        input: this.textInput,
+        type: this.direction.toString()
+      })
+      this.transResult = response.parsedBody.data
+      if (!response.parsedBody.result) {
+        this.showError(response.parsedBody.msg)
       }
-      this.isReady = true
-    } else if (this.genMethod === 'photo') {
-      try {
-        const response = await postForm(guwenPictureURL, {
-          'photo': this.photoFile,
-          'type': String(this.direction)
-        })
-        this.transResult = response.parsedBody.data
-        if (!response.parsedBody.result) {
-          this.showError(response.parsedBody.msg)
-        }
-      } catch (e) {
-        this.showError(e)
-      }
-      this.isReady = true
+    } catch (e) {
+      this.showError(e)
     }
+    this.isReady = true
   }
 }
 </script>
