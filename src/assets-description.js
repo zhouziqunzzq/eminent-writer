@@ -31,17 +31,21 @@ export const imgURLs = [
   require('@/assets/home/button-guwen.png'),
   require('@/assets/home/button-poem.png'),
   // poem
-  require('@/assets/poem/bg-number-of-words-area.png'),
-  require('@/assets/poem/bg-photo.png'),
-  require('@/assets/poem/bg-photo-area.png'),
-  require('@/assets/poem/bg-poem-area.png'),
+  // require('@/assets/poem/bg-number-of-words-area.png'),
+  // require('@/assets/poem/bg-photo.png'),
+  // require('@/assets/poem/bg-photo-area.png'),
+  // require('@/assets/poem/bg-poem-area.png'),
   require('@/assets/poem/bg-result.png'),
-  require('@/assets/poem/bg-settings.png'),
+  // require('@/assets/poem/bg-settings.png'),
   require('@/assets/poem/bg-text.png'),
   require('@/assets/poem/bg-text-input.png'),
-  require('@/assets/poem/button-go.png'),
-  require('@/assets/poem/button-no.png'),
-  require('@/assets/poem/button-no-chosen.png'),
-  require('@/assets/poem/button-yes.png'),
-  require('@/assets/poem/button-yes-chosen.png')
+  require('@/assets/poem/bg-text-panel.png'),
+  require('@/assets/poem/button-gen-text.png'),
+  // require('@/assets/poem/button-go.png'),
+  // require('@/assets/poem/button-no.png'),
+  // require('@/assets/poem/button-no-chosen.png'),
+  require('@/assets/poem/button-regen.png'),
+  require('@/assets/poem/button-share.png')
+  // require('@/assets/poem/button-yes.png'),
+  // require('@/assets/poem/button-yes-chosen.png')
 ]

@@ -29,6 +29,7 @@
 
 <script>
 import { mapActions } from 'vuex'
+import { RESET_HISTORY } from '@/mutation-types'
 
 export default {
   data () {
@@ -39,6 +40,9 @@ export default {
       'showInfo',
       'showError'
     ])
+  },
+  mounted () {
+    this.$store.commit(RESET_HISTORY)
   }
 }
 </script>
@@ -48,11 +52,11 @@ export default {
     background-image: url("~@/assets/home/bg.png")
     background-repeat: no-repeat
     background-size: 100% 100%
-    padding: 1em 3em
+    padding: 1rem 2rem 4rem 2rem
 
   .sink
-    transform: translateY(6em)
+    transform: translateY(3.5rem)
 
   .float
-    transform: translateY(-6em)
+    transform: translateY(-3.5rem)
 </style>

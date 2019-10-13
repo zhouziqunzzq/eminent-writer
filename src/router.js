@@ -41,16 +41,16 @@ export default new Router({
       name: 'poem-photo',
       component: () => import('./views/poem/GenPhoto.vue')
     },
-    {
-      path: '/poem/settings',
-      name: 'poem-settings',
-      component: () => import('./views/poem/GenSettings.vue')
-    },
-    {
-      path: '/poem/result',
-      name: 'poem-result',
-      component: () => import('./views/poem/GenResult.vue')
-    },
+    // {
+    //   path: '/poem/settings',
+    //   name: 'poem-settings',
+    //   component: () => import('./views/poem/GenSettings.vue')
+    // },
+    // {
+    //   path: '/poem/result',
+    //   name: 'poem-result',
+    //   component: () => import('./views/poem/GenResult.vue')
+    // },
     // guwen
     {
       path: '/guwen/text',

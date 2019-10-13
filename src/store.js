@@ -15,7 +15,8 @@ import {
   SHOW_SNACKBAR,
   HIDE_SNACKBAR,
   SET_SNACKBAR_MSG,
-  SET_SNACKBAR_COLOR
+  SET_SNACKBAR_COLOR,
+  RESET_HISTORY
 } from './mutation-types'
 
 Vue.use(Vuex)
@@ -94,6 +95,24 @@ export default new Vuex.Store({
     },
     [SET_SNACKBAR_COLOR] (state, color) {
       state.snackbar.color = color
+    },
+    // app
+    [RESET_HISTORY] (state) {
+      state.duilian.textInput = ''
+      state.duilian.photoFile = null
+      state.duilian.genMethod = 'text'
+      state.duilian.isKeyword = true
+
+      state.poem.textInput = ''
+      state.poem.photoFile = null
+      state.poem.genMethod = 'text'
+      state.poem.isCangtou = false
+      state.poem.numberOfWords = 5
+
+      state.guwen.textInput = ''
+      state.guwen.photoFile = null
+      state.guwen.genMethod = 'text'
+      state.guwen.direction = 2
     }
   },
   actions: {
