@@ -137,7 +137,21 @@
                           v-for="(v, i) in myPoems[poemPtr]"
                           :key="v + i.toString()"
                   >
-                    <h5 class="poem-text text-xs-center xingkai">{{v}}</h5>
+                    <v-container fluid fill-height pa-0>
+                      <v-layout row justify-center>
+                        <v-flex xs1
+                                v-for="(c, j) in v"
+                                :key="c + j.toString()"
+                                :class="{
+                                  'poem-text-wrapper-5': numberOfWords === 5,
+                                  'poem-text-wrapper-7': numberOfWords === 7,
+                                  'poem-text-cangtou': isCangtou && i < textInput.length && j === 0
+                                }"
+                        >
+                          <h5 class="poem-text text-xs-center xingkai">{{c}}</h5>
+                        </v-flex>
+                      </v-layout>
+                    </v-container>
                   </v-flex>
                 </v-layout>
               </v-container>
@@ -368,6 +382,15 @@ export default {
   .poem-text
     font-size: 1.4rem
     font-weight: normal
+
+  .poem-text-wrapper-5
+    margin-right: 0.4rem
+
+  .poem-text-wrapper-7
+    margin-right: 0.15rem
+
+  .poem-text-cangtou
+    color: red
 
   #result-text-wrapper
     padding: 8rem 8.6rem 6rem 4.5rem
