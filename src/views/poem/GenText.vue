@@ -14,6 +14,11 @@
                              placeholder="请输入关键词"
                              v-model="textInput"
                       />
+                      <v-icon medium
+                              id="text-input-cleaner"
+                              v-show="textInput.length !== 0"
+                              @click="textInput = ''"
+                      >close</v-icon>
                     </v-flex>
                   </v-layout>
                 </v-container>
@@ -315,9 +320,16 @@ export default {
 
   #text-input-wrapper
     padding: 0 0 0.6rem 3rem
+    position: relative
 
   #text-input
     font-size: 1.5rem
+
+  #text-input-cleaner
+    position: absolute
+    right: 13%
+    top: 30%
+    color: #BC8E5A
 
   #hr-line
     background-image: linear-gradient(to right, #d9d2cc, #d5c5b6, #d1b8a0, #cbab8b, #c59e76, #c59e76, #c59e76, #c59e76, #cbab8b, #d1b8a0, #d5c5b6, #d9d2cc);
