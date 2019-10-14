@@ -17,7 +17,7 @@
                                    placeholder="请输入关键词"
                                    v-model="textInput"
                             />
-                            <v-icon medium
+                            <v-icon large
                                     id="text-input-cleaner"
                                     v-show="textInput.length !== 0"
                                     @click="textInput = ''"
@@ -135,7 +135,7 @@
           <v-flex xs6>
             <v-container fluid fill-height pa-0>
               <v-layout row justify-center>
-                <v-flex xs12 md8 lg6>
+                <v-flex xs12 md8 lg7>
                   <v-img src="~@/assets/poem/bg-result.png"
                          id="result-wrapper"
                          :contain="true">
@@ -162,8 +162,8 @@
                           </v-container>
                         </v-flex>
                         <v-img src="~@/assets/poem/button-close.png"
-                               :width="40"
-                               :height="40"
+                               :width="45"
+                               :height="45"
                                :contain="true"
                                id="result-closer"
                                class="cursor-pointer"
@@ -354,12 +354,12 @@ export default {
     position: relative
 
   #text-input
-    font-size: 1.8rem
+    font-size: 2.6rem
 
   #text-input-cleaner
     position: absolute
     right: 14%
-    top: 35%
+    top: 35.5%
     color: #BC8E5A
 
   #hr-line
@@ -391,32 +391,32 @@ export default {
   #result-closer
     position: absolute
     right: 16.6%
-    top: 11%
+    top: 18%
     width: 3rem
     height: 3rem
     z-index: 200
 
   .poem-text
-    font-size: 2rem
+    font-size: 3.2rem
     font-weight: normal
 
   .poem-text-wrapper-5
-    margin-right: -0.05rem
+    margin-right: -0.2rem
 
   .poem-text-wrapper-7
-    margin-right: -0.1rem
+    margin-right: -0.6rem
 
   .poem-text-cangtou
     color: red
 
   #result-text-wrapper
-    padding: 14% 26.5% 32.5% 10%
+    padding: 20% 26.5% 38.5% 10%
     position: relative
 
   #result-button-wrapper
     position: absolute
     width: 100%
-    bottom: 30%
+    bottom: 25%
 
   .cursor-pointer
     cursor: pointer
