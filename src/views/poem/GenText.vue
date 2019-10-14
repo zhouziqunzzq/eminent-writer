@@ -5,110 +5,114 @@
         <v-container fluid fill-height pa-0>
           <v-layout column justify-end>
             <v-flex xs4>
-              <v-img src="~@/assets/poem/bg-text-input.png">
-                <v-container fluid fill-height id="text-input-wrapper">
-                  <v-layout row wrap justify-center align-center>
-                    <v-flex xs6>
-                      <label for="text-input"></label>
-                      <input type="text" id="text-input"
-                             placeholder="请输入关键词"
-                             v-model="textInput"
-                      />
-                      <v-icon medium
-                              id="text-input-cleaner"
-                              v-show="textInput.length !== 0"
-                              @click="textInput = ''"
-                      >close</v-icon>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
+              <v-container fluid fill-height pa-0>
+                <v-layout row justify-center>
+                  <v-flex xs12 md8 lg5>
+                    <v-img src="~@/assets/poem/bg-text-input.png">
+                      <v-container fluid fill-height id="text-input-wrapper">
+                        <v-layout row wrap justify-center align-center>
+                          <v-flex xs8>
+                            <label for="text-input"></label>
+                            <input type="text" id="text-input"
+                                   placeholder="请输入关键词"
+                                   v-model="textInput"
+                            />
+                            <v-icon medium
+                                    id="text-input-cleaner"
+                                    v-show="textInput.length !== 0"
+                                    @click="textInput = ''"
+                            >close</v-icon>
+                          </v-flex>
+                        </v-layout>
+                      </v-container>
+                    </v-img>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
       </v-flex>
-      <v-flex xs1>
-        <v-container fluid fill-height>
-          <v-layout column justify-center>
-            <v-flex xs2 id="hr-line">
-            </v-flex>
-          </v-layout>
-        </v-container>
-      </v-flex>
-      <v-flex xs6>
+      <v-flex xs8>
         <v-container fluid fill-height pa-0>
           <v-layout column justify-begin>
             <v-flex xs4>
-              <v-img src="~@/assets/poem/bg-text-panel.png"
-                     :contain="true">
-                <v-container fluid fill-height id="panel-wrapper">
-                  <v-layout column justify-begin>
-                    <v-flex xs2 mb-2>
-                      <v-container fluid fill-height pa-0>
-                        <v-layout row justify-begin>
+              <v-container fluid fill-height pa-0>
+                <v-layout row justify-center>
+                  <v-flex xs12 md8 lg5>
+                    <v-img src="~@/assets/poem/bg-text-panel.png"
+                           :contain="true">
+                      <v-container fluid fill-height id="panel-wrapper">
+                        <v-layout column justify-begin>
+                          <v-flex xs2 mb-2>
+                            <v-container fluid fill-height pa-0>
+                              <v-layout row justify-begin>
+                                <v-flex xs3>
+                                  <v-img src="~@/assets/poem/panel-format-title.png"></v-img>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                          </v-flex>
+                          <v-flex xs2 mb-3>
+                            <v-container fluid fill-height pa-0>
+                              <v-layout row justify-begin>
+                                <v-flex xs1 option @click="onOptionWuyanClick">
+                                  <v-img :src="optionWuyanBg" :contain="true"></v-img>
+                                </v-flex>
+                                <v-flex xs2 mr-4 option-label @click="onOptionWuyanClick">
+                                  <v-img src="~@/assets/poem/option-wuyan.png"></v-img>
+                                </v-flex>
+                                <v-flex xs1 option @click="onOptionQiyanClick">
+                                  <v-img :src="optionQiyanBg" :contain="true"></v-img>
+                                </v-flex>
+                                <v-flex xs2 option-label @click="onOptionQiyanClick">
+                                  <v-img src="~@/assets/poem/option-qiyan.png"></v-img>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                          </v-flex>
+                          <v-flex xs2 mb-2>
+                            <v-container fluid fill-height pa-0>
+                              <v-layout row justify-begin>
+                                <v-flex xs3>
+                                  <v-img src="~@/assets/poem/panel-type-title.png"></v-img>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                          </v-flex>
+                          <v-flex xs2 mb-3>
+                            <v-container fluid fill-height pa-0>
+                              <v-layout row justify-begin>
+                                <v-flex xs1 option @click="onOptionJuejuClick">
+                                  <v-img :src="optionJuejuBg" :contain="true"></v-img>
+                                </v-flex>
+                                <v-flex xs2 mr-4 option-label @click="onOptionJuejuClick">
+                                  <v-img src="~@/assets/poem/option-jueju.png"></v-img>
+                                </v-flex>
+                                <v-flex xs1 option @click="onOptionCangtouClick">
+                                  <v-img :src="optionCangtouBg" :contain="true"></v-img>
+                                </v-flex>
+                                <v-flex xs2 option-label @click="onOptionCangtouClick">
+                                  <v-img src="~@/assets/poem/option-cangtou.png"></v-img>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
+                          </v-flex>
                           <v-flex xs3>
-                            <v-img src="~@/assets/poem/panel-format-title.png"></v-img>
+                            <v-container fluid fill-height pa-0>
+                              <v-layout row justify-center>
+                                <v-flex xs4 cursor-pointer @click="onTextGoClick">
+                                  <v-img src="~@/assets/poem/button-gen-text.png"></v-img>
+                                </v-flex>
+                              </v-layout>
+                            </v-container>
                           </v-flex>
                         </v-layout>
                       </v-container>
-                    </v-flex>
-                    <v-flex xs2 mb-3>
-                      <v-container fluid fill-height pa-0>
-                        <v-layout row justify-begin>
-                          <v-flex xs1 option @click="onOptionWuyanClick">
-                            <v-img :src="optionWuyanBg" :contain="true"></v-img>
-                          </v-flex>
-                          <v-flex xs2 mr-4 option-label @click="onOptionWuyanClick">
-                            <v-img src="~@/assets/poem/option-wuyan.png"></v-img>
-                          </v-flex>
-                          <v-flex xs1 option @click="onOptionQiyanClick">
-                            <v-img :src="optionQiyanBg" :contain="true"></v-img>
-                          </v-flex>
-                          <v-flex xs2 option-label @click="onOptionQiyanClick">
-                            <v-img src="~@/assets/poem/option-qiyan.png"></v-img>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-flex>
-                    <v-flex xs2 mb-2>
-                      <v-container fluid fill-height pa-0>
-                        <v-layout row justify-begin>
-                          <v-flex xs3>
-                            <v-img src="~@/assets/poem/panel-type-title.png"></v-img>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-flex>
-                    <v-flex xs2 mb-3>
-                      <v-container fluid fill-height pa-0>
-                        <v-layout row justify-begin>
-                          <v-flex xs1 option @click="onOptionJuejuClick">
-                            <v-img :src="optionJuejuBg" :contain="true"></v-img>
-                          </v-flex>
-                          <v-flex xs2 mr-4 option-label @click="onOptionJuejuClick">
-                            <v-img src="~@/assets/poem/option-jueju.png"></v-img>
-                          </v-flex>
-                          <v-flex xs1 option @click="onOptionCangtouClick">
-                            <v-img :src="optionCangtouBg" :contain="true"></v-img>
-                          </v-flex>
-                          <v-flex xs2 option-label @click="onOptionCangtouClick">
-                            <v-img src="~@/assets/poem/option-cangtou.png"></v-img>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-flex>
-                    <v-flex xs3>
-                      <v-container fluid fill-height pa-0>
-                        <v-layout row justify-center>
-                          <v-flex xs4 @click="onTextGoClick">
-                            <v-img src="~@/assets/poem/button-gen-text.png"></v-img>
-                          </v-flex>
-                        </v-layout>
-                      </v-container>
-                    </v-flex>
-                  </v-layout>
-                </v-container>
-              </v-img>
+                    </v-img>
+                  </v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
@@ -125,46 +129,59 @@
           </v-flex>
         </v-layout>
         <!--result-->
-        <v-layout column justify-center v-show="isReady">
-          <v-flex xs6 style="position: relative;">
-            <v-img src="~@/assets/poem/bg-result.png"
-                   id="result-wrapper"
-                   :contain="true">
-              <v-container fluid fill-height id="result-text-wrapper">
-                <v-layout column justify-center>
-                  <v-flex xs1
-                          mb-1
-                          v-for="(v, i) in myPoems[poemPtr]"
-                          :key="v + i.toString()"
-                  >
-                    <v-container fluid fill-height pa-0>
-                      <v-layout row justify-center>
+        <v-layout column justify-center
+                  v-show="isReady"
+                  style="position: relative">
+          <v-flex xs6>
+            <v-container fluid fill-height pa-0>
+              <v-layout row justify-center>
+                <v-flex xs12 md8 lg6>
+                  <v-img src="~@/assets/poem/bg-result.png"
+                         id="result-wrapper"
+                         :contain="true">
+                    <v-container fluid fill-height id="result-text-wrapper">
+                      <v-layout column justify-center>
                         <v-flex xs1
-                                v-for="(c, j) in v"
-                                :key="c + j.toString()"
-                                :class="{
+                                v-for="(v, i) in myPoems[poemPtr]"
+                                :key="v + i.toString()"
+                        >
+                          <v-container fluid fill-height pa-0>
+                            <v-layout row justify-center>
+                              <v-flex xs1
+                                      v-for="(c, j) in v"
+                                      :key="c + j.toString()"
+                                      :class="{
                                   'poem-text-wrapper-5': numberOfWords === 5,
                                   'poem-text-wrapper-7': numberOfWords === 7,
                                   'poem-text-cangtou': isCangtou && i < textInput.length && j === 0
                                 }"
-                        >
-                          <h5 class="poem-text text-xs-center xingkai">{{c}}</h5>
+                              >
+                                <h5 class="poem-text text-xs-center xingkai">{{c}}</h5>
+                              </v-flex>
+                            </v-layout>
+                          </v-container>
                         </v-flex>
+                        <v-img src="~@/assets/poem/button-close.png"
+                               :width="40"
+                               :height="40"
+                               :contain="true"
+                               id="result-closer"
+                               class="cursor-pointer"
+                               @click="showResult = false"></v-img>
                       </v-layout>
                     </v-container>
-                  </v-flex>
-                </v-layout>
-              </v-container>
-            </v-img>
-            <div id="result-closer" @click="showResult = false"></div>
+                  </v-img>
+                </v-flex>
+              </v-layout>
+            </v-container>
           </v-flex>
-          <v-flex xs2 mt-3>
+          <v-flex xs2 id="result-button-wrapper">
             <v-container fluid fill-height pa-0>
               <v-layout row justify-center>
-                <v-flex xs3 mr-3 @click="share">
+                <v-flex xs1 mr-4 @click="share" class="cursor-pointer">
                   <v-img src="~@/assets/poem/button-share.png"></v-img>
                 </v-flex>
-                <v-flex xs3 ml-3 @click="onRegenerateClick">
+                <v-flex xs1 ml-4 @click="onRegenerateClick" class="cursor-pointer">
                   <v-img src="~@/assets/poem/button-regen.png"></v-img>
                 </v-flex>
               </v-layout>
@@ -333,29 +350,30 @@ export default {
     padding: 1rem 1.2rem
 
   #text-input-wrapper
-    padding: 0 0 0.6rem 3rem
+    padding: 5% 12% 8% 26.5%
     position: relative
 
   #text-input
-    font-size: 1.5rem
+    font-size: 1.8rem
 
   #text-input-cleaner
     position: absolute
-    right: 13%
-    top: 30%
+    right: 14%
+    top: 35%
     color: #BC8E5A
 
   #hr-line
     background-image: linear-gradient(to right, #d9d2cc, #d5c5b6, #d1b8a0, #cbab8b, #c59e76, #c59e76, #c59e76, #c59e76, #cbab8b, #d1b8a0, #d5c5b6, #d9d2cc);
 
   #panel-wrapper
-    padding: 2rem 3rem 2rem 3rem
+    padding: 10% 12% 10% 12%
 
   .option
-    transform: scale(1.2)
+    transform: scale(1.0)
+    cursor: pointer
 
   .option-label
-    transform: scale(0.7)
+    transform: scale(0.6)
     margin-left: 0.3rem
 
   #result-mask
@@ -364,34 +382,42 @@ export default {
     top: 0
     width: 100%
     height: 100%
-    background-color: rgba(0, 0, 0, 0.5)
+    background-color: #313131BB
     z-index: 100
 
   #result-wrapper
-    transform: translateX(5%)
+    transform: translateX(8%)
 
   #result-closer
     position: absolute
-    right: 1.2rem
-    top: 2.9rem
+    right: 16.6%
+    top: 11%
     width: 3rem
     height: 3rem
-    opacity: 0
     z-index: 200
 
   .poem-text
-    font-size: 1.4rem
+    font-size: 2rem
     font-weight: normal
 
   .poem-text-wrapper-5
-    margin-right: 0.4rem
+    margin-right: -0.05rem
 
   .poem-text-wrapper-7
-    margin-right: 0.15rem
+    margin-right: -0.1rem
 
   .poem-text-cangtou
     color: red
 
   #result-text-wrapper
-    padding: 8rem 8.6rem 6rem 4.5rem
+    padding: 14% 26.5% 32.5% 10%
+    position: relative
+
+  #result-button-wrapper
+    position: absolute
+    width: 100%
+    bottom: 30%
+
+  .cursor-pointer
+    cursor: pointer
 </style>
