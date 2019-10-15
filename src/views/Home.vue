@@ -43,6 +43,7 @@ export default {
   },
   mounted () {
     this.$store.commit(RESET_HISTORY)
+    this.$router.push('/poem/text')
   }
 }
 </script>

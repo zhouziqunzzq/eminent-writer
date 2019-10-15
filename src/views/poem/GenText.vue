@@ -8,13 +8,13 @@
               <v-img src="~@/assets/poem/bg-text-input.png">
                 <v-container fluid fill-height id="text-input-wrapper">
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs6>
+                    <v-flex xs8>
                       <label for="text-input"></label>
                       <input type="text" id="text-input"
                              placeholder="请输入关键词"
                              v-model="textInput"
                       />
-                      <v-icon medium
+                      <v-icon large
                               id="text-input-cleaner"
                               v-show="textInput.length !== 0"
                               @click="textInput = ''"
@@ -28,9 +28,14 @@
         </v-container>
       </v-flex>
       <v-flex xs1>
-        <v-container fluid fill-height>
+        <v-container fluid fill-height pa-0>
           <v-layout column justify-center>
-            <v-flex xs2 id="hr-line">
+            <v-flex xs1>
+              <v-container fluid fill-height pa-0>
+                <v-layout row justify-center>
+                  <v-flex xs6 id="hr-line"></v-flex>
+                </v-layout>
+              </v-container>
             </v-flex>
           </v-layout>
         </v-container>
@@ -79,7 +84,7 @@
                         </v-layout>
                       </v-container>
                     </v-flex>
-                    <v-flex xs2 mb-3>
+                    <v-flex xs2 mb-4>
                       <v-container fluid fill-height pa-0>
                         <v-layout row justify-begin>
                           <v-flex xs1 option @click="onOptionJuejuClick">
@@ -126,14 +131,14 @@
         </v-layout>
         <!--result-->
         <v-layout column justify-center v-show="isReady">
-          <v-flex xs6 style="position: relative;">
+          <v-flex xs6>
             <v-img src="~@/assets/poem/bg-result.png"
                    id="result-wrapper"
                    :contain="true">
               <v-container fluid fill-height id="result-text-wrapper">
                 <v-layout column justify-center>
                   <v-flex xs1
-                          mb-1
+                          mb-3
                           v-for="(v, i) in myPoems[poemPtr]"
                           :key="v + i.toString()"
                   >
@@ -154,17 +159,21 @@
                     </v-container>
                   </v-flex>
                 </v-layout>
+                <v-img src="~@/assets/poem/button-result-close.png"
+                       id="result-closer"
+                       :contain="true"
+                       :width="60" :height="60"
+                       @click="showResult = false"></v-img>
               </v-container>
             </v-img>
-            <div id="result-closer" @click="showResult = false"></div>
           </v-flex>
           <v-flex xs2 mt-3>
             <v-container fluid fill-height pa-0>
               <v-layout row justify-center>
-                <v-flex xs3 mr-3 @click="share">
+                <v-flex xs3 mr-4 @click="share">
                   <v-img src="~@/assets/poem/button-share.png"></v-img>
                 </v-flex>
-                <v-flex xs3 ml-3 @click="onRegenerateClick">
+                <v-flex xs3 ml-4 @click="onRegenerateClick">
                   <v-img src="~@/assets/poem/button-regen.png"></v-img>
                 </v-flex>
               </v-layout>
@@ -333,29 +342,29 @@ export default {
     padding: 1rem 1.2rem
 
   #text-input-wrapper
-    padding: 0 0 0.6rem 3rem
+    padding: 5% 12% 8% 26.5%
     position: relative
 
   #text-input
-    font-size: 1.5rem
+    font-size: 2.8rem
 
   #text-input-cleaner
     position: absolute
     right: 13%
-    top: 30%
+    top: 35%
     color: #BC8E5A
 
   #hr-line
     background-image: linear-gradient(to right, #d9d2cc, #d5c5b6, #d1b8a0, #cbab8b, #c59e76, #c59e76, #c59e76, #c59e76, #cbab8b, #d1b8a0, #d5c5b6, #d9d2cc);
 
   #panel-wrapper
-    padding: 2rem 3rem 2rem 3rem
+    padding: 10% 12% 6% 12%
 
   .option
-    transform: scale(1.2)
+    transform: scale(1.0)
 
   .option-label
-    transform: scale(0.7)
+    transform: scale(0.67)
     margin-left: 0.3rem
 
   #result-mask
@@ -372,26 +381,24 @@ export default {
 
   #result-closer
     position: absolute
-    right: 1.2rem
-    top: 2.9rem
-    width: 3rem
-    height: 3rem
-    opacity: 0
-    z-index: 200
+    right: 11%
+    top: 9%
+    z-index: 300
 
   .poem-text
-    font-size: 1.4rem
+    font-size: 2.8rem
     font-weight: normal
 
   .poem-text-wrapper-5
-    margin-right: 0.4rem
+    margin-right: 1.0rem
 
   .poem-text-wrapper-7
-    margin-right: 0.15rem
+    margin-right: 0.4rem
 
   .poem-text-cangtou
     color: red
 
   #result-text-wrapper
-    padding: 8rem 8.6rem 6rem 4.5rem
+    position: relative
+    padding: 35% 32% 15% 17.5%
 </style>
