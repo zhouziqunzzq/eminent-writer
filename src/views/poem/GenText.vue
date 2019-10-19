@@ -1,5 +1,10 @@
 <template>
   <v-container fluid fill-height id="wrapper">
+    <v-img src="~@/assets/logo.png"
+           id="logo"
+           :contain="true"
+           :width="245"
+           :height="269"></v-img>
     <v-layout column>
       <v-flex xs4>
         <v-container fluid fill-height pa-0>
@@ -8,14 +13,14 @@
               <v-img src="~@/assets/poem/bg-text-input.png">
                 <v-container fluid fill-height id="text-input-wrapper">
                   <v-layout row wrap justify-center align-center>
-                    <v-flex xs8>
+                    <v-flex xs9>
                       <label for="text-input"></label>
                       <input type="text" id="text-input"
-                             placeholder="请输入关键词"
+                             placeholder="请输入关键词（2-4个字）"
                              v-model="textInput"
+                             :class="{ 'text-input-empty': textInput.length === 0 }"
                       />
-                      <v-icon large
-                              id="text-input-cleaner"
+                      <v-icon id="text-input-cleaner"
                               v-show="textInput.length !== 0"
                               @click="textInput = ''"
                       >close</v-icon>
@@ -87,17 +92,17 @@
                     <v-flex xs2 mb-4>
                       <v-container fluid fill-height pa-0>
                         <v-layout row justify-begin>
-                          <v-flex xs1 option @click="onOptionJuejuClick">
-                            <v-img :src="optionJuejuBg" :contain="true"></v-img>
-                          </v-flex>
-                          <v-flex xs2 mr-4 option-label @click="onOptionJuejuClick">
-                            <v-img src="~@/assets/poem/option-jueju.png"></v-img>
-                          </v-flex>
                           <v-flex xs1 option @click="onOptionCangtouClick">
                             <v-img :src="optionCangtouBg" :contain="true"></v-img>
                           </v-flex>
-                          <v-flex xs2 option-label @click="onOptionCangtouClick">
+                          <v-flex xs2 mr-4 option-label @click="onOptionCangtouClick">
                             <v-img src="~@/assets/poem/option-cangtou.png"></v-img>
+                          </v-flex>
+                          <v-flex xs1 option @click="onOptionJuejuClick">
+                            <v-img :src="optionJuejuBg" :contain="true"></v-img>
+                          </v-flex>
+                          <v-flex xs2 option-label @click="onOptionJuejuClick">
+                            <v-img src="~@/assets/poem/option-jueju.png"></v-img>
                           </v-flex>
                         </v-layout>
                       </v-container>
@@ -162,7 +167,7 @@
                 <v-img src="~@/assets/poem/button-result-close.png"
                        id="result-closer"
                        :contain="true"
-                       :width="60" :height="60"
+                       :width="80" :height="80"
                        @click="showResult = false"></v-img>
               </v-container>
             </v-img>
@@ -278,6 +283,10 @@ export default {
         this.showError('请输入关键词')
         return
       }
+      if (this.textInput.length < 2) {
+        this.showError('关键词不能少于 2 个字符')
+        return
+      }
       if (this.textInput.length > 4) {
         this.showError('关键词不能超过 4 个字符')
         return
@@ -339,20 +348,29 @@ export default {
     background-image: url("~@/assets/poem/bg-text.png")
     background-repeat: no-repeat
     background-size: 100% 100%
-    padding: 1rem 1.2rem
+    padding: 10rem 5rem
+
+  #logo
+    position: absolute
+    top: 28px
+    left: 63px
 
   #text-input-wrapper
     padding: 5% 12% 8% 26.5%
     position: relative
 
   #text-input
-    font-size: 2.8rem
+    font-size: 5rem
+
+  .text-input-empty
+    font-size: 2.8rem !important
 
   #text-input-cleaner
     position: absolute
     right: 13%
-    top: 35%
+    top: 33%
     color: #BC8E5A
+    font-size: 4.5rem
 
   #hr-line
     background-image: linear-gradient(to right, #d9d2cc, #d5c5b6, #d1b8a0, #cbab8b, #c59e76, #c59e76, #c59e76, #c59e76, #cbab8b, #d1b8a0, #d5c5b6, #d9d2cc);
@@ -381,12 +399,12 @@ export default {
 
   #result-closer
     position: absolute
-    right: 11%
-    top: 9%
+    right: 12%
+    top: 10%
     z-index: 300
 
   .poem-text
-    font-size: 2.8rem
+    font-size: 4.5rem
     font-weight: normal
 
   .poem-text-wrapper-5
