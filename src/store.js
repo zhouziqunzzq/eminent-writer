@@ -32,7 +32,7 @@ export default new Vuex.Store({
       textInput: '',
       photoFile: null,
       genMethod: 'text',
-      isCangtou: false,
+      isCangtou: true,
       numberOfWords: 5
     },
     guwen: {
